@@ -1,0 +1,49 @@
+.contacts {
+	height: 100vh;
+
+	display: grid;
+	grid-template-columns: minmax(200px, 480px) minmax(200px, 100%);
+}
+
+.searchbar {
+	margin: 12px var(--offset-horizonal);
+
+	display: flex;
+	gap: 16px;
+}
+
+.searchbar button {
+	display: grid;
+	place-content: center;
+}
+
+.searchbar input {
+	/* учитываем margin и padding */
+	width: calc(100% - var(--offset-horizonal) - 16px);
+}
+
+.profileTab {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	border-left: 1px solid var(--stroke);
+}
+
+.profileTab ul {
+	padding: 0;
+
+	list-style-type: none;
+}
+
+.profileTab > button {
+	margin: var(--offset-vertical) var(--offset-horizonal);
+	text-align: left;
+	color: var(--red);
+}
+
+@media (width <880px) {
+	.searchbar {
+		margin: 0 var(--offset-horizonal);
+	}
+}

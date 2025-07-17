@@ -1,0 +1,97 @@
+.userInfo {
+	padding: var(--offset-vertical) var(--offset-horizonal);
+}
+.userInfo:active {
+	background-color: var(--fill);
+}
+.userInfo.selected {
+	background-color: var(--fill);
+}
+
+.userInfo img {
+	width: 54px;
+	height: 54px;
+
+	border-radius: 54px;
+	object-fit: cover;
+}
+
+.userInfo svg {
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
+.userInfo small {
+	color: var(--darkgrey);
+	font-size: 14px;
+}
+
+.left {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.profile,
+.link,
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.contact h4,
+.profile h4,
+.link h4 {
+	font-weight: 400;
+}
+.message h4 {
+	font-weight: 700;
+}
+
+.status {
+	color: var(--darkgrey);
+}
+
+.profile p {
+	color: var(--darkgrey);
+	font-size: 14px;
+}
+
+.message .content {
+	flex: 1;
+
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.counter {
+	width: 18px;
+	height: 18px;
+
+	display: grid;
+	place-content: center;
+
+	border-radius: 18px;
+	background-color: var(--mainColor);
+}
+.counter span {
+	color: var(--white);
+	font-size: 12px;
+	font-weight: 700;
+}
+
+@media (hover: hover) {
+	.userInfo:hover {
+		cursor: pointer;
+	}
+}
+
+@media (width < 880px) {
+	.userInfo {
+		padding: var(--offset-vertical) var(--offset-horizonal);
+	}
+}

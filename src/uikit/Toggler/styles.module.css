@@ -1,0 +1,40 @@
+.toggler {
+	padding: var(--offset-vertical) var(--offset-horizonal);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.checkbox {
+	position: relative;
+}
+
+.checkbox input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+
+	width: 32px;
+	height: 16px;
+
+	opacity: 0;
+}
+
+.checkbox input:checked + svg circle {
+	transform: translateX(16px);
+	fill: var(--mainColor);
+}
+
+@media (hover: hover) {
+	.checkbox input:hover {
+		cursor: pointer;
+	}
+}
+
+@media (width < 880px) {
+	.toggler {
+		padding: var(--offset-vertical) var(--offset-horizonal);
+	}
+}

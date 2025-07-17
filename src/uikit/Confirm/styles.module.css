@@ -1,0 +1,35 @@
+.confirm {
+	width: 300px;
+
+	border-radius: 12px;
+	background-color: var(--white);
+	overflow: hidden;
+}
+
+.confirm p {
+	padding: 16px;
+}
+
+.confirm div {
+	display: flex;
+}
+
+.confirm button {
+	padding: var(--offset-vertical) var(--offset-horizonal);
+
+	flex: 1;
+
+	border: none;
+	background: none;
+
+	text-align: center;
+	font-size: 16px;
+	font-weight: 400;
+}
+.confirm button:active {
+	background-color: var(--fill);
+}
+
+.confirm div button:first-of-type {
+	color: var(--red);
+}

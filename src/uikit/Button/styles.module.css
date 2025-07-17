@@ -1,0 +1,31 @@
+.button {
+	padding: 12px 16px;
+
+	border: none;
+	border-radius: 16px;
+	background: var(--mainColor);
+
+	color: var(--white, #fcfcfc);
+	font-size: 16px;
+	font-weight: 700;
+	text-align: center;
+}
+.button:active {
+	cursor: pointer;
+	background: var(--mainColor-active);
+}
+
+.button:disabled {
+	opacity: 0.4;
+}
+.button:disabled:hover {
+	cursor: not-allowed;
+	background: var(--mainColor);
+}
+
+@media (hover: hover) {
+	.button:hover {
+		cursor: pointer;
+		background: var(--mainColor-hover);
+	}
+}

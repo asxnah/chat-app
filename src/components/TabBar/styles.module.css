@@ -1,0 +1,39 @@
+.tabbar {
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	background-color: var(--black);
+}
+
+.tabbar ul {
+	padding: 0;
+
+	height: 100%;
+
+	list-style-type: none;
+}
+
+.tab {
+	padding: 16px;
+
+	opacity: 0.5;
+}
+.tab.active {
+	opacity: 1;
+}
+
+.tab button {
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.tab span {
+	color: var(--white);
+}
