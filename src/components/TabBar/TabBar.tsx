@@ -8,8 +8,6 @@ export const TabBar = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	console.log(location.pathname);
-
 	return (
 		<aside className={styles.tabbar}>
 			<ul>
