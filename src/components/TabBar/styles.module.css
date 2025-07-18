@@ -37,3 +37,9 @@
 .tab span {
 	color: var(--white);
 }
+
+@media (width <880px) {
+	.tabbar {
+		display: none;
+	}
+}

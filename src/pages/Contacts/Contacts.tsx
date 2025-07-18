@@ -19,6 +19,7 @@ const Contacts = () => {
 	}
 
 	const [notifications, setNotifications] = useState<boolean>(false);
+	const [width, setWidth] = useState<number>(window.innerWidth);
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [contacts, setContacts] = useState<Contact[]>([]);
 	const [selectedUser, setSelectedUser] = useState<Contact>({
@@ -49,8 +50,16 @@ const Contacts = () => {
 			},
 		];
 		setContacts(fetchedContacts);
-		setSelectedUser(fetchedContacts[0]);
 		setNotifications(fetchedContacts[0].notifications);
+		setSelectedUser(fetchedContacts[0]);
+	}, []);
+
+	useEffect(() => {
+		function handleResize() {
+			setWidth(window.innerWidth);
+		}
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
 	const setNotificationsGlobally = (id: string) => {
@@ -95,7 +104,9 @@ const Contacts = () => {
 							id={contact.id}
 							name={contact.name}
 							avatar={contact.avatar}
-							selected={selectedUser.id === contact.id ? true : false}
+							selected={
+								selectedUser.id === contact.id && width > 880 ? true : false
+							}
 							onClick={() => setSelectedUser(contact)}
 						/>
 					);

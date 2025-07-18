@@ -46,4 +46,17 @@
 	.searchbar {
 		margin: 0 var(--offset-horizonal);
 	}
+	.searchbar input {
+		width: 100%;
+	}
+	.searchbar button {
+		display: none;
+	}
+
+	.contacts {
+		display: block;
+	}
+	.profileTab {
+		display: none;
+	}
 }
