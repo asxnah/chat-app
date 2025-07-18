@@ -91,6 +91,7 @@ const Contacts = () => {
 					heading="Contacts"
 					extension={<AddContactIcon />}
 					onChevronClick={() => navigate('/contacts')}
+					onExtensionClick={() => navigate('/contacts')}
 				/>
 			)}
 			<main className={styles.contacts}>
