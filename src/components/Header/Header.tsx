@@ -21,15 +21,25 @@ export const Header = ({
 	onExtensionClick,
 }: HeaderProps) => {
 	return (
-		<header className={`${styles.header} ${avatar && styles.chat}`}>
-			<button onClick={onChevronClick}>
-				<ChevronLeft />
-			</button>
-			<div>
-				{avatar && <img src={avatar} alt="contact avatar" />}
-				<h1>{heading}</h1>
-				<button onClick={onHeadingClick}></button>
+		<header className={styles.header}>
+			<div className={styles.chat}>
+				<button onClick={onChevronClick}>
+					<ChevronLeft />
+				</button>
+				{avatar && (
+					<div>
+						<img src={avatar} alt="contact avatar" />
+						<h1>{heading}</h1>
+						<button onClick={onHeadingClick}></button>
+					</div>
+				)}
 			</div>
+			{!avatar && (
+				<div className={styles.heading}>
+					<h1>{heading}</h1>
+					<button onClick={onHeadingClick}></button>
+				</div>
+			)}
 			{extension && <button onClick={onExtensionClick}>{extension}</button>}
 		</header>
 	);
