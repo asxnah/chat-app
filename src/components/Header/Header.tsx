@@ -21,7 +21,7 @@ export const Header = ({
 	onExtensionClick,
 }: HeaderProps) => {
 	return (
-		<header className={`${styles.header} ${avatar && styles.hasAvatar}`}>
+		<header className={`${styles.header} ${avatar && styles.chat}`}>
 			<button onClick={onChevronClick}>
 				<ChevronLeft />
 			</button>
