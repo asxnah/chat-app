@@ -136,3 +136,9 @@ button {
 		cursor: pointer;
 	}
 }
+
+@media (width <880px) {
+	#root {
+		flex-direction: column;
+	}
+}
