@@ -34,7 +34,7 @@ const Contacts = () => {
 	useEffect(() => {
 		const fetchedContacts = [
 			{
-				id: '32740yrtouhgjfkds',
+				id: '1',
 				name: 'Cutie𖦹𖦹',
 				avatar:
 					'https://i.pinimg.com/1200x/ae/6c/74/ae6c748ab01cd6696ef77c6ba27ed6f2.jpg',
@@ -42,7 +42,7 @@ const Contacts = () => {
 				notifications: true,
 			},
 			{
-				id: 'kfjdwiuehdskj34567',
+				id: '2',
 				name: 'Bunny 🐇',
 				avatar:
 					'https://i.pinimg.com/736x/8d/94/44/8d9444611dab6bdec74ea00df0ec59a2.jpg',
@@ -74,9 +74,15 @@ const Contacts = () => {
 		setContacts(updatedContacts);
 	};
 
+	const contactAction = (id: string) => {
+		const foundContact = contacts.find((contact) => contact.id === id);
+		if (width > 880 && foundContact) setSelectedUser(foundContact);
+		if (width < 880) navigate(`/contacts/contact?id=${id}`);
+	};
+
 	const addContact = () => {
-		// width > 880 -> popup
-		// width < 880 -> navigate contacts/add
+		if (width > 880) console.log('popup');
+		if (width < 880) navigate('/contacts/add');
 		return;
 	};
 
@@ -120,7 +126,7 @@ const Contacts = () => {
 								selected={
 									selectedUser.id === contact.id && width > 880 ? true : false
 								}
-								onClick={() => setSelectedUser(contact)}
+								onClick={() => contactAction(contact.id)}
 							/>
 						);
 					})}
@@ -131,7 +137,7 @@ const Contacts = () => {
 						name={selectedUser.name}
 						avatar={selectedUser.avatar}
 						content={selectedUser.email}
-						onClick={() => navigate('/contacts')}
+						onClick={() => navigate(`/contacts/contact?id=${selectedUser.id}`)}
 					/>
 					<ul>
 						<li>
