@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserInfo } from '../../uikit/UserInfo/UserInfo';
+import { Header } from '../../components/Header/Header';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
@@ -84,63 +85,75 @@ const Contacts = () => {
 	};
 
 	return (
-		<main className={styles.contacts}>
-			<section className={styles.contactsList}>
-				<div className={styles.searchbar}>
-					<Button onClick={addContact} content={<AddContactIcon />} />
-					<Input
-						placeholder="Search contacts"
-						value={searchValue}
-						onChange={(e) => {
-							setSearchValue(e.target.value);
-						}}
-					/>
-				</div>
-				{contacts.map((contact) => {
-					return (
-						<UserInfo
-							key={contact.id}
-							type="contact"
-							id={contact.id}
-							name={contact.name}
-							avatar={contact.avatar}
-							selected={
-								selectedUser.id === contact.id && width > 880 ? true : false
-							}
-							onClick={() => setSelectedUser(contact)}
-						/>
-					);
-				})}
-			</section>
-			<section className={styles.profileTab}>
-				<UserInfo
-					type="profile"
-					name={selectedUser.name}
-					avatar={selectedUser.avatar}
-					content={selectedUser.email}
-					onClick={() => navigate('/contacts')}
+		<>
+			{width < 880 && (
+				<Header
+					heading="Contacts"
+					extension={<AddContactIcon />}
+					onChevronClick={() => navigate('/contacts')}
 				/>
-				<ul>
-					<li>
-						<UserInfo
-							type="link"
-							name="Write a message"
-							onClick={() => navigate('/contacts')}
+			)}
+			<main className={styles.contacts}>
+				<section className={styles.contactsList}>
+					<div className={styles.searchbar}>
+						<Button
+							onClick={addContact}
+							content={<AddContactIcon color="#fcfcfc" />}
 						/>
-					</li>
-					<li>
-						<Toggler
-							content="Notifications"
-							checked={notifications}
-							onToggle={() => setNotificationsGlobally(selectedUser.id)}
+						<Input
+							placeholder="Search contacts"
+							value={searchValue}
+							onChange={(e) => {
+								setSearchValue(e.target.value);
+							}}
 						/>
-					</li>
-				</ul>
-				<button onClick={() => deleteContact(selectedUser.id)}>
-					Delete contact
-				</button>
-			</section>
-		</main>
+					</div>
+					{contacts.map((contact) => {
+						return (
+							<UserInfo
+								key={contact.id}
+								type="contact"
+								id={contact.id}
+								name={contact.name}
+								avatar={contact.avatar}
+								selected={
+									selectedUser.id === contact.id && width > 880 ? true : false
+								}
+								onClick={() => setSelectedUser(contact)}
+							/>
+						);
+					})}
+				</section>
+				<section className={styles.profileTab}>
+					<UserInfo
+						type="profile"
+						name={selectedUser.name}
+						avatar={selectedUser.avatar}
+						content={selectedUser.email}
+						onClick={() => navigate('/contacts')}
+					/>
+					<ul>
+						<li>
+							<UserInfo
+								type="link"
+								name="Write a message"
+								onClick={() => navigate('/contacts')}
+							/>
+						</li>
+						<li>
+							<Toggler
+								content="Notifications"
+								checked={notifications}
+								onToggle={() => setNotificationsGlobally(selectedUser.id)}
+							/>
+						</li>
+					</ul>
+					<button onClick={() => deleteContact(selectedUser.id)}>
+						Delete contact
+					</button>
+				</section>
+			</main>
+		</>
 	);
 };
 
