@@ -78,8 +78,7 @@
 @media (max-width: 880px) {
 	:root {
 		--offset-horizonal: 16px;
-		--offset-vertical: 12px;
-		--width: 240px;
+		--width: 300px;
 	}
 }
 
