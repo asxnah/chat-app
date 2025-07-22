@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchedContacts } from '../../mockData/contacts';
 import { UserInfo } from '../../uikit/UserInfo/UserInfo';
 import { Header } from '../../components/Header/Header';
 import { Button } from '../../uikit/Button/Button';
@@ -7,6 +8,16 @@ import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
 import { AddContactIcon } from '../../assets/icons/AddContactIcon';
 import styles from './styles.module.css';
+
+const useWindowWidth = () => {
+	const [width, setWidth] = useState(window.innerWidth);
+	useEffect(() => {
+		const handleResize = () => setWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+	return width;
+};
 
 const Contacts = () => {
 	const navigate = useNavigate();
@@ -16,74 +27,64 @@ const Contacts = () => {
 		name: string;
 		avatar: string;
 		email: string;
-		notifications: boolean;
+		notifs: boolean;
 	}
 
-	const [notifications, setNotifications] = useState<boolean>(false);
-	const [width, setWidth] = useState<number>(window.innerWidth);
+	const [tab, setTab] = useState<'contacts' | 'contact'>('contacts');
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [contacts, setContacts] = useState<Contact[]>([]);
-	const [selectedUser, setSelectedUser] = useState<Contact>({
+	const [user, setUser] = useState<Contact>({
 		id: '',
 		name: '',
 		avatar: '',
 		email: '',
-		notifications: false,
+		notifs: false,
 	});
+	const filteredContacts = useMemo(() => {
+		return searchValue
+			? contacts.filter((contact) =>
+					contact.name.toLowerCase().includes(searchValue.toLowerCase())
+			  )
+			: contacts;
+	}, [searchValue, contacts]);
+	const width = useWindowWidth();
+	const showList = width < 880 && tab === 'contacts';
+	const showProfile = width < 880 && tab === 'contact';
 
 	useEffect(() => {
-		const fetchedContacts = [
-			{
-				id: '1',
-				name: 'Cutie𖦹𖦹',
-				avatar:
-					'https://i.pinimg.com/1200x/ae/6c/74/ae6c748ab01cd6696ef77c6ba27ed6f2.jpg',
-				email: 'email@example.com',
-				notifications: true,
-			},
-			{
-				id: '2',
-				name: 'Bunny 🐇',
-				avatar:
-					'https://i.pinimg.com/736x/8d/94/44/8d9444611dab6bdec74ea00df0ec59a2.jpg',
-				email: 'email@example.com',
-				notifications: true,
-			},
-		];
-		setContacts(fetchedContacts);
-		setNotifications(fetchedContacts[0].notifications);
-		setSelectedUser(fetchedContacts[0]);
-	}, []);
-
-	useEffect(() => {
-		function handleResize() {
-			setWidth(window.innerWidth);
+		if (fetchedContacts.length > 0) {
+			setContacts(fetchedContacts);
+			setUser(fetchedContacts[0]);
 		}
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	const setNotificationsGlobally = (id: string) => {
-		setNotifications(!notifications);
+	const search = (value: string) => {
+		setSearchValue(value);
+	};
 
+	const setNotifsGlobally = (id: string) => {
 		const updatedContacts = contacts.map((contact) =>
-			contact.id === id
-				? { ...contact, notifications: !notifications }
-				: contact
+			contact.id === id ? { ...contact, notifs: !contact.notifs } : contact
 		);
 		setContacts(updatedContacts);
+
+		if (user.id === id) {
+			const updatedUser = updatedContacts.find((contact) => contact.id === id);
+			if (updatedUser) setUser(updatedUser);
+		}
 	};
 
 	const contactAction = (id: string) => {
 		const foundContact = contacts.find((contact) => contact.id === id);
-		if (width > 880 && foundContact) setSelectedUser(foundContact);
-		if (width < 880) navigate(`/contacts/contact?id=${id}`);
+
+		if (!foundContact) return;
+		setUser(foundContact);
+		if (width < 880) setTab('contact');
 	};
 
 	const addContact = () => {
 		if (width > 880) console.log('popup');
 		if (width < 880) navigate('/contacts/add');
-		return;
 	};
 
 	const deleteContact = (id: string) => {
@@ -92,7 +93,7 @@ const Contacts = () => {
 
 	return (
 		<>
-			{width < 880 && (
+			{width < 880 && tab === 'contacts' && (
 				<Header
 					heading="Contacts"
 					extension={<AddContactIcon />}
@@ -100,65 +101,68 @@ const Contacts = () => {
 					onExtensionClick={() => navigate('/contacts')}
 				/>
 			)}
+			{width < 880 && tab === 'contact' && (
+				<Header heading="Profile" onChevronClick={() => setTab('contacts')} />
+			)}
 			<main className={styles.contacts}>
-				<section className={styles.contactsList}>
-					<div className={styles.searchbar}>
-						<Button
-							onClick={addContact}
-							content={<AddContactIcon color="#fcfcfc" />}
+				{(showList || width > 880) && (
+					<section className={styles.contactsList}>
+						<div className={styles.searchbar}>
+							<Button
+								onClick={addContact}
+								content={<AddContactIcon color="#fcfcfc" />}
+							/>
+							<Input
+								placeholder="Search contacts"
+								value={searchValue}
+								onChange={(e) => search(e.target.value)}
+							/>
+						</div>
+						{filteredContacts.map((contact) => {
+							return (
+								<UserInfo
+									key={contact.id}
+									type="contact"
+									id={contact.id}
+									name={contact.name}
+									avatar={contact.avatar}
+									selected={user.id === contact.id && width > 880}
+									onClick={() => contactAction(contact.id)}
+								/>
+							);
+						})}
+					</section>
+				)}
+				{(showProfile || width > 880) && (
+					<section className={styles.profileTab}>
+						<UserInfo
+							type="profile"
+							name={user.name}
+							avatar={user.avatar}
+							content={user.email}
+							onClick={() => console.log(`open edit contact popup`)}
 						/>
-						<Input
-							placeholder="Search contacts"
-							value={searchValue}
-							onChange={(e) => {
-								setSearchValue(e.target.value);
-							}}
-						/>
-					</div>
-					{contacts.map((contact) => {
-						return (
-							<UserInfo
-								key={contact.id}
-								type="contact"
-								id={contact.id}
-								name={contact.name}
-								avatar={contact.avatar}
-								selected={
-									selectedUser.id === contact.id && width > 880 ? true : false
-								}
-								onClick={() => contactAction(contact.id)}
-							/>
-						);
-					})}
-				</section>
-				<section className={styles.profileTab}>
-					<UserInfo
-						type="profile"
-						name={selectedUser.name}
-						avatar={selectedUser.avatar}
-						content={selectedUser.email}
-						onClick={() => navigate(`/contacts/contact?id=${selectedUser.id}`)}
-					/>
-					<ul>
-						<li>
-							<UserInfo
-								type="link"
-								name="Write a message"
-								onClick={() => navigate('/contacts')}
-							/>
-						</li>
-						<li>
-							<Toggler
-								content="Notifications"
-								checked={notifications}
-								onToggle={() => setNotificationsGlobally(selectedUser.id)}
-							/>
-						</li>
-					</ul>
-					<button onClick={() => deleteContact(selectedUser.id)}>
-						Delete contact
-					</button>
-				</section>
+						<ul>
+							<li key="message">
+								<UserInfo
+									type="link"
+									name="Write a message"
+									onClick={() => console.log(`go to chat with this user`)}
+								/>
+							</li>
+							<li key="notifs">
+								<Toggler
+									content="Notifications"
+									checked={user.notifs}
+									onToggle={() => setNotifsGlobally(user.id)}
+								/>
+							</li>
+						</ul>
+						<button onClick={() => deleteContact(user.id)}>
+							Delete contact
+						</button>
+					</section>
+				)}
 			</main>
 		</>
 	);
