@@ -1,0 +1,44 @@
+.wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+
+	width: 100%;
+	height: 100%;
+
+	display: grid;
+	place-content: center;
+
+	background: var(--screen-dim);
+}
+
+.form {
+	padding: 32px;
+	width: 512px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+
+	border-radius: 16px;
+	background: var(--white);
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	h3 {
+		color: var(--black);
+		font-size: 24px;
+		font-weight: 600;
+	}
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
