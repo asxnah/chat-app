@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'react';
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	placeholder: string;
@@ -21,7 +21,7 @@ export const Input = ({
 			type={type}
 			value={value}
 			placeholder={placeholder}
-			className={styles.input}
+			className={s.input}
 			{...rest}
 			minLength={1}
 			required

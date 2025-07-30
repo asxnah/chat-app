@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { ChevronLeft } from '../../assets/icons/ChevronLeft';
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 interface HeaderProps {
 	heading: string;
@@ -21,8 +21,8 @@ export const Header = ({
 	onExtensionClick,
 }: HeaderProps) => {
 	return (
-		<header className={styles.header}>
-			<div className={styles.chat}>
+		<header className={s.header}>
+			<div className={s.chat}>
 				<button onClick={onChevronClick}>
 					<ChevronLeft />
 				</button>
@@ -35,7 +35,7 @@ export const Header = ({
 				)}
 			</div>
 			{!avatar && (
-				<div className={styles.heading}>
+				<div className={s.heading}>
 					<h1>{heading}</h1>
 					<button onClick={onHeadingClick}></button>
 				</div>

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 type ButtonProps = {
 	type?: 'button' | 'submit';
@@ -17,7 +17,7 @@ export const Button = ({
 	return (
 		<button
 			type={type}
-			className={styles.button}
+			className={s.button}
 			disabled={disabled}
 			onClick={onClick}
 		>

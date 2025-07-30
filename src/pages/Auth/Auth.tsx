@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Input } from '../../uikit/Input/Input';
 import { Button } from '../../uikit/Button/Button';
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 const Auth = () => {
 	const navigate = useNavigate();
@@ -68,7 +68,7 @@ const Auth = () => {
 	}, [code.length]);
 
 	return (
-		<main className={styles.auth}>
+		<main className={s.auth}>
 			<AnimatePresence mode="sync">
 				{step === 'email' && (
 					<motion.section
@@ -115,7 +115,7 @@ const Auth = () => {
 							</p>
 						</div>
 						<form>
-							<div className={styles.digits}>
+							<div className={s.digits}>
 								{code.map((value, i) => {
 									return (
 										<input

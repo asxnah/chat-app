@@ -1,5 +1,5 @@
 import { ChevronRight } from './ChevronRight';
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 type UserInfoProps = {
 	type: 'contact' | 'profile' | 'message' | 'link';
@@ -28,25 +28,23 @@ export const UserInfo = ({
 }: UserInfoProps) => {
 	return (
 		<article
-			className={`${styles.userInfo} ${styles[type]} ${
-				selected && styles.selected
-			}`}
+			className={`${s.userInfo} ${s[type]} ${selected && s.selected}`}
 			onClick={onClick}
 			tabIndex={0}
 			id={id}
 		>
-			<div className={styles.left}>
+			<div className={s.left}>
 				{avatar && <img src={avatar} alt="user avatar" />}
-				<div className={styles.content}>
-					<div className={styles.container}>
+				<div className={s.content}>
+					<div className={s.container}>
 						<h4>{name}</h4>
 						{type === 'message' && <small>{date}</small>}
 					</div>
-					<div className={styles.container}>
+					<div className={s.container}>
 						{content && <p>{content}</p>}
-						{status && <p className={styles.status}>{status}</p>}
+						{status && <p className={s.status}>{status}</p>}
 						{counter && (
-							<div className={styles.counter}>
+							<div className={s.counter}>
 								<span>{counter}</span>
 							</div>
 						)}

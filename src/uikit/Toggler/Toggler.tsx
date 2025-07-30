@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 type TogglerProps = React.HTMLAttributes<HTMLDivElement> & {
 	content: string;
@@ -14,9 +14,9 @@ export const Toggler = ({
 	...rest
 }: TogglerProps) => {
 	return (
-		<div className={styles.toggler} {...rest} tabIndex={0}>
+		<div className={s.toggler} {...rest} tabIndex={0}>
 			<p>{content}</p>
-			<div className={styles.checkbox}>
+			<div className={s.checkbox}>
 				<input
 					type="checkbox"
 					name="checkbox"

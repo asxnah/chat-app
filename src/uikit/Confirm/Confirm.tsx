@@ -1,4 +1,4 @@
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 interface ConfirmProps {
 	content: string;
@@ -8,7 +8,7 @@ interface ConfirmProps {
 
 export const Confirm = ({ content, onConfirm, onDecline }: ConfirmProps) => {
 	return (
-		<div className={styles.confirm}>
+		<div className={s.confirm}>
 			<p>{content}</p>
 			<div>
 				<button onClick={onConfirm}>Yes</button>

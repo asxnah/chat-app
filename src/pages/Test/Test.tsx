@@ -7,7 +7,7 @@ import { Toggler } from '../../uikit/Toggler/Toggler';
 import { UserInfo } from '../../uikit/UserInfo/UserInfo';
 import { Confirm } from '../../uikit/Confirm/Confirm';
 
-import styles from './styles.module.css';
+import s from './styles.module.css';
 
 const Test = () => {
 	const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Test = () => {
 	const [value, setValue] = useState('');
 
 	return (
-		<main className={styles.main}>
+		<main className={s.main}>
 			<section>
 				<UserInfo
 					type="link"
