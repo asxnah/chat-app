@@ -1,4 +1,20 @@
+@font-face {
+	font-family: 'Open Sans Variable';
+	src: url('/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf')
+		format('truetype-variations');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 :root {
+	/* font */
+	font-family: 'Open Sans Variable', system-ui, -apple-system,
+		BlinkMacSystemFont, sans-serif;
+	color: var(--black);
+	background-color: var(--white);
+
+	/* dimensions */
 	--offset-horizonal: 32px;
 	--offset-vertical: 12px;
 	--width: 512px;
@@ -82,21 +98,9 @@
 	}
 }
 
-@font-face {
-	font-family: 'Open Sans Variable';
-	src: url('/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf')
-		format('truetype-variations');
-	font-weight: 100 900;
-	font-style: normal;
-	font-display: swap;
-}
-
 #root {
 	height: 100vh;
-
 	display: flex;
-
-	background-color: var(--white);
 }
 
 main {
@@ -106,12 +110,8 @@ main {
 * {
 	margin: 0;
 	box-sizing: border-box;
-
-	font-family: 'Open Sans Variable', system-ui, -apple-system,
-		BlinkMacSystemFont, sans-serif;
-	color: var(--black);
-
 	transition: 0.3s ease-out;
+	font-family: inherit;
 }
 
 *:not(input):focus-visible {
