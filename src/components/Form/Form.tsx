@@ -9,7 +9,7 @@ interface FormProps {
 	emailValue: string;
 	onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onSubmit: () => void;
+	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	onClose: () => void;
 }
 
@@ -23,8 +23,8 @@ export const Form = ({
 	onClose,
 }: FormProps) => {
 	return (
-		<section className={s.wrapper} onSubmit={onSubmit}>
-			<form className={s.form}>
+		<section className={s.wrapper}>
+			<form className={s.form} onSubmit={onSubmit}>
 				<div className={s.heading}>
 					<h3>{heading}</h3>
 					<button onClick={onClose}>
@@ -50,7 +50,7 @@ export const Form = ({
 						value={emailValue}
 					/>
 				</div>
-				<Button content="Save" />
+				<Button content="Save" type="submit" />
 			</form>
 		</section>
 	);
