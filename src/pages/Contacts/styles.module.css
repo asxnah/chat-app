@@ -47,7 +47,24 @@
 	color: var(--red);
 }
 
-@media (width <880px) {
+.noSelection {
+	margin: auto 32px 32px 32px;
+	color: var(--darkgrey);
+	text-align: center;
+	font-size: 16px;
+}
+
+.noContacts {
+	padding: 12px 32px;
+
+	button {
+		display: block;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+}
+
+@media (width < 880px) {
 	.searchbar {
 		margin: 0 var(--offset-horizonal);
 	}
