@@ -5,6 +5,11 @@
 	grid-template-columns: minmax(200px, 480px) minmax(200px, 100%);
 }
 
+.contactsList {
+	height: 100%;
+	overflow-y: scroll;
+}
+
 .searchbar {
 	margin: 12px var(--offset-horizonal);
 
