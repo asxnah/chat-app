@@ -17,7 +17,7 @@ const Test = () => {
 
 	return (
 		<main className={s.main}>
-			<section>
+			<section className={s.main__section}>
 				<UserInfo
 					type="link"
 					name="Link somewhere"
@@ -73,7 +73,10 @@ const Test = () => {
 				/>
 			</section>
 
-			<section style={{ display: 'flex', gap: '16px' }}>
+			<section
+				className={s.main__section}
+				style={{ display: 'flex', gap: '16px' }}
+			>
 				<Button content="Button" onClick={() => alert('clicked')} />
 				<Input
 					placeholder="Placeholder"
