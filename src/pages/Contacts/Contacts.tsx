@@ -183,8 +183,8 @@ const Contacts = () => {
 					/>
 				)}
 				{(showList || width > 880) && (
-					<section className={s.contactsList}>
-						<div className={s.searchbar}>
+					<section className={s.contacts__list}>
+						<div className={s.contacts__searchbar}>
 							<Button
 								onClick={addContact}
 								content={<AddContactIcon color="#fcfcfc" />}
@@ -210,7 +210,7 @@ const Contacts = () => {
 								);
 							})
 						) : (
-							<div className={s.noContacts}>
+							<div className={s.contacts__no_contacts}>
 								<p>
 									You don’t have contacts yet.&nbsp;{' '}
 									<button onClick={addContact}>Create first contact</button>
@@ -220,7 +220,7 @@ const Contacts = () => {
 					</section>
 				)}
 				{(showProfile || width > 880) && (
-					<section className={s.profileTab}>
+					<section className={s.profile__tab}>
 						{contacts.length > 0 ? (
 							<>
 								<UserInfo
@@ -251,7 +251,7 @@ const Contacts = () => {
 								</button>
 							</>
 						) : (
-							<p className={s.noSelection}>
+							<p className={s.profile__no_selection}>
 								Select a chat or a contact to start messaging
 							</p>
 						)}

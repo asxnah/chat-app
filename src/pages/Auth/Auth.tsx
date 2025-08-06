@@ -73,12 +73,16 @@ const Auth = () => {
 				{step === 'email' && (
 					<motion.section
 						key="email"
+						className={s.auth__section}
 						initial={{ x: -50, opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
 						exit={{ x: -50, opacity: 0 }}
 					>
-						<h2>Enter your email to start chatting</h2>
+						<h2 className={s.auth__title}>
+							Enter your email to start chatting
+						</h2>
 						<form
+							className={s.auth__form}
 							onSubmit={(e) => {
 								e.preventDefault();
 								handleStep('code');
@@ -101,25 +105,30 @@ const Auth = () => {
 				{step === 'code' && (
 					<motion.section
 						key="code"
+						className={s.auth__section}
 						initial={{ x: 50, opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
 						exit={{ x: 50, opacity: 0 }}
 					>
-						<div>
-							<h2>Confirm your email</h2>
-							<p>
+						<div className={s.auth__message}>
+							<h2 className={s.auth__title}>Confirm your email</h2>
+							<p className={s.auth__description}>
 								The code was sent to {email}.{' '}
-								<button onClick={() => handleStep('email')}>
+								<button
+									className={s.auth__link}
+									onClick={() => handleStep('email')}
+								>
 									Change email
 								</button>
 							</p>
 						</div>
-						<form>
-							<div className={s.digits}>
+						<form className={s.auth__form}>
+							<div className={s.auth__digits}>
 								{code.map((value, i) => {
 									return (
 										<input
 											key={i}
+											className={s.auth__digit}
 											placeholder="_"
 											value={value}
 											minLength={1}
@@ -134,7 +143,7 @@ const Auth = () => {
 									);
 								})}
 							</div>
-							{isIncorrect && <p>Incorrect code</p>}
+							{isIncorrect && <p className={s.auth__error}>Incorrect code</p>}
 						</form>
 					</motion.section>
 				)}
