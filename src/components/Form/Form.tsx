@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { CrossIcon } from '../../assets/icons/CrossIcon';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
@@ -11,6 +12,10 @@ interface FormProps {
 	onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	onClose: () => void;
+	error?: {
+		active: boolean;
+		msg: string;
+	};
 }
 
 export const Form = ({
@@ -21,6 +26,10 @@ export const Form = ({
 	nameValue,
 	emailValue,
 	onClose,
+	error = {
+		active: false,
+		msg: 'Error creating a contact. Please try again later.',
+	},
 }: FormProps) => {
 	return (
 		<section className={s.wrapper}>
@@ -31,6 +40,16 @@ export const Form = ({
 						<CrossIcon />
 					</button>
 				</div>
+				<motion.p
+					className={s.form__error}
+					initial={{ y: -16, opacity: 0 }}
+					animate={{
+						y: error.active ? 0 : -16,
+						opacity: error.active ? 1 : 0,
+					}}
+				>
+					{error.msg}
+				</motion.p>
 				<div className={s.form__inputs}>
 					<Input
 						name="name"
