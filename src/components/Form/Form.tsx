@@ -26,12 +26,12 @@ export const Form = ({
 		<section className={s.wrapper}>
 			<form className={s.form} onSubmit={onSubmit}>
 				<div className={s.heading}>
-					<h3>{heading}</h3>
+					<h3 className={s.heading__title}>{heading}</h3>
 					<button onClick={onClose}>
 						<CrossIcon />
 					</button>
 				</div>
-				<div className={s.inputs}>
+				<div className={s.form__inputs}>
 					<Input
 						name="name"
 						placeholder="Name"
