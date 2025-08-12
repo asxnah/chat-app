@@ -8,13 +8,13 @@ export const TabBar = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	if (location.pathname === '/auth') return null;
+
 	return (
 		<aside className={s.tabbar}>
 			<ul>
 				<li
-					className={`${s.tab} ${
-						location.pathname === '/chats' && s.active
-					}`}
+					className={`${s.tab} ${location.pathname === '/chats' && s.active}`}
 				>
 					<button onClick={() => navigate('/chats')}>
 						<ChatsIcon />
@@ -33,9 +33,7 @@ export const TabBar = () => {
 				</li>
 			</ul>
 			<div
-				className={`${s.tab} ${
-					location.pathname === '/settings' && s.active
-				}`}
+				className={`${s.tab} ${location.pathname === '/settings' && s.active}`}
 			>
 				<button onClick={() => navigate('/settings')}>
 					<SettingsIcon />
