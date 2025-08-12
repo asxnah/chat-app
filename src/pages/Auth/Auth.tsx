@@ -123,12 +123,12 @@ const Auth = () => {
 							</p>
 						</div>
 						<form className={s.auth__form}>
-							<div className={s.auth__digits}>
+							<div className={s.digits__inputs}>
 								{code.map((value, i) => {
 									return (
 										<input
 											key={i}
-											className={s.auth__digit}
+											className={s.digits__input}
 											placeholder="_"
 											value={value}
 											minLength={1}

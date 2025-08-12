@@ -48,13 +48,13 @@
 	color: var(--red);
 }
 
-.auth__digits {
+.digits__inputs {
 	display: flex;
 	justify-content: center;
 	gap: 1rem;
 }
 
-.auth__digit {
+.digits__input {
 	width: 46px;
 	height: 46px;
 
@@ -69,11 +69,11 @@
 	text-align: center;
 }
 
-.auth__digit:focus-visible {
+.digits__input:focus-visible {
 	outline: 1px solid var(--mainColor);
 }
 
-.auth__digit::placeholder {
+.digits__input::placeholder {
 	font-size: 20px;
 	font-weight: 400;
 	color: var(--darkgrey);
