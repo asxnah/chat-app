@@ -8,7 +8,7 @@ import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
 import { AddContactIcon } from '../../assets/icons/AddContactIcon';
 import s from './styles.module.css';
-import { Form } from '../../components/Form/Form';
+import { Popup } from '../../components/Popup/Popup';
 
 const useWindowWidth = () => {
 	const [width, setWidth] = useState(window.innerWidth);
@@ -172,7 +172,7 @@ const Contacts = () => {
 			)}
 			<main className={s.contacts}>
 				{isPopupOpened && (
-					<Form
+					<Popup
 						heading={formHeading}
 						nameValue={nameValue}
 						emailValue={emailValue}

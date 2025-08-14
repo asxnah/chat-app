@@ -18,7 +18,7 @@ interface FormProps {
 	};
 }
 
-export const Form = ({
+export const Popup = ({
 	heading,
 	onNameChange,
 	onEmailChange,
