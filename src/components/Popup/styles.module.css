@@ -38,17 +38,3 @@
 	font-size: 24px;
 	font-weight: 600;
 }
-
-.form__inputs {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-}
-
-.form__error {
-	position: absolute;
-	left: var(--offset-horizonal);
-	top: 64px;
-
-	color: var(--red);
-}

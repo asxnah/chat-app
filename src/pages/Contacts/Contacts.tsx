@@ -174,13 +174,30 @@ const Contacts = () => {
 				{isPopupOpened && (
 					<Popup
 						heading={formHeading}
-						nameValue={nameValue}
-						emailValue={emailValue}
-						onNameChange={(e) => setNameValue(e.target.value)}
-						onEmailChange={(e) => setEmailValue(e.target.value)}
 						onSubmit={submitPopup}
 						onClose={() => setPopupOpened(false)}
-					/>
+					>
+						<div className={s.form__inputs}>
+							<Input
+								name="name"
+								placeholder="Name"
+								maxLength={120}
+								required
+								onChange={(e) => setNameValue(e.target.value)}
+								value={nameValue}
+							/>
+							<Input
+								type="email"
+								name="email"
+								placeholder="Email"
+								maxLength={60}
+								required
+								onChange={(e) => setEmailValue(e.target.value)}
+								value={emailValue}
+							/>
+						</div>
+						<Button content="Save" type="submit" />
+					</Popup>
 				)}
 				{(showList || width > 880) && (
 					<section className={s.contacts__list}>
@@ -213,7 +230,12 @@ const Contacts = () => {
 							<div className={s.contacts__no_contacts}>
 								<p>
 									You don’t have contacts yet.&nbsp;{' '}
-									<button onClick={addContact}>Create first contact</button>
+									<button
+										className={s.no_contacts__button}
+										onClick={addContact}
+									>
+										Create first contact
+									</button>
 								</p>
 							</div>
 						)}
@@ -230,7 +252,7 @@ const Contacts = () => {
 									content={user.email}
 									onClick={editContact}
 								/>
-								<ul>
+								<ul className={s.profile__tab__list}>
 									<li key="message">
 										<UserInfo
 											type="link"
@@ -246,7 +268,10 @@ const Contacts = () => {
 										/>
 									</li>
 								</ul>
-								<button onClick={() => deleteContact(user.id)}>
+								<button
+									className={s.profile__tab__button}
+									onClick={() => deleteContact(user.id)}
+								>
 									Delete contact
 								</button>
 							</>

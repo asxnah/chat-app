@@ -35,13 +35,13 @@
 	border-left: 1px solid var(--stroke);
 }
 
-.profile__tab ul {
+.profile__tab__list {
 	padding: 0;
 
 	list-style-type: none;
 }
 
-.profile__tab > button {
+.profile__tab__button {
 	margin: var(--offset-vertical) var(--offset-horizonal);
 	text-align: left;
 	color: var(--red);
@@ -56,12 +56,17 @@
 
 .contacts__no_contacts {
 	padding: 12px 32px;
+}
+.no_contacts__button {
+	display: block;
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
 
-	button {
-		display: block;
-		text-decoration: underline;
-		text-underline-offset: 4px;
-	}
+.form__inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }
 
 @media (width < 880px) {
