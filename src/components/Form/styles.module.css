@@ -1,0 +1,23 @@
+.form,
+.form__inputs {
+	display: flex;
+	flex-direction: column;
+}
+
+@media (width > 800px) {
+	.form {
+		gap: 32px;
+	}
+	.form__inputs {
+		gap: 16px;
+	}
+}
+
+@media (width < 800px) {
+	.form {
+		gap: 16px;
+	}
+	.form__inputs {
+		gap: 12px;
+	}
+}
