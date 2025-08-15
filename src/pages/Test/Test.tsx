@@ -6,6 +6,7 @@ import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
 import { UserInfo } from '../../uikit/UserInfo/UserInfo';
 import { Confirm } from '../../uikit/Confirm/Confirm';
+import { Form } from '../../components/Form/Form';
 
 import s from './styles.module.css';
 
@@ -14,6 +15,8 @@ const Test = () => {
 
 	const [checked, setChecked] = useState(false);
 	const [value, setValue] = useState('');
+	const [emailValue, setEmail] = useState('');
+	const [nameValue, setName] = useState('');
 
 	return (
 		<main className={s.main}>
@@ -101,6 +104,14 @@ const Test = () => {
 						onDecline={() => alert('declined')}
 					/>
 				</div>
+				<Form
+					buttonText="Submit"
+					nameValue={nameValue}
+					emailValue={emailValue}
+					onNameChange={(e) => setName(e.target.value)}
+					onEmailChange={(e) => setEmail(e.target.value)}
+					onSubmit={() => alert('Submitted')}
+				/>
 			</section>
 		</main>
 	);
