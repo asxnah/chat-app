@@ -1,24 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchedContacts } from '../../mockData/contacts';
-import { UserInfo } from '../../uikit/UserInfo/UserInfo';
-import { Header } from '../../components/Header/Header';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
 import { AddContactIcon } from '../../assets/icons/AddContactIcon';
-import s from './styles.module.css';
 import { Popup } from '../../components/Popup/Popup';
+import useWindowWidth from '../../hooks/useWindowWidth';
+import s from './styles.module.css';
 
-const useWindowWidth = () => {
-	const [width, setWidth] = useState(window.innerWidth);
-	useEffect(() => {
-		const handleResize = () => setWidth(window.innerWidth);
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
-	return width;
-};
+import fetchedContacts from '../../mockData/contacts.json';
+import { Form } from '../../components/Form/Form';
 
 const Contacts = () => {
 	const navigate = useNavigate();
@@ -31,7 +23,6 @@ const Contacts = () => {
 		notifs: boolean;
 	}
 
-	const [tab, setTab] = useState<'contacts' | 'contact'>('contacts');
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [contacts, setContacts] = useState<Contact[]>([]);
 	const [user, setUser] = useState<Contact>({
@@ -49,8 +40,6 @@ const Contacts = () => {
 			: contacts;
 	}, [searchValue, contacts]);
 	const width = useWindowWidth();
-	const showList = width < 880 && tab === 'contacts';
-	const showProfile = width < 880 && tab === 'contact';
 	const [formHeading, setFormHeading] = useState<
 		'New contact' | 'Edit contact'
 	>('New contact');
@@ -88,7 +77,7 @@ const Contacts = () => {
 
 		if (!foundContact) return;
 		setUser(foundContact);
-		if (width < 880) setTab('contact');
+		if (width < 880) navigate(`/contact/${id}`);
 	};
 
 	const submitPopup = (e: React.FormEvent<HTMLFormElement>) => {
@@ -96,10 +85,10 @@ const Contacts = () => {
 
 		if (formHeading === 'New contact') {
 			const newContact: Contact = {
-				id: Date.now().toString(), // placeholder ID (actually should be searched in DB)
+				id: Date.now().toString(), // placeholder => db search
 				name: nameValue,
 				avatar:
-					'https://i.pinimg.com/736x/e3/e4/63/e3e463274111bdfa9bcc2bdad6d51afe.jpg', // placeholder avatar(actually should be searched in DB)
+					'https://i.pinimg.com/736x/e3/e4/63/e3e463274111bdfa9bcc2bdad6d51afe.jpg', // placeholder => db search
 				email: emailValue,
 				notifs: true,
 			};
@@ -126,15 +115,10 @@ const Contacts = () => {
 	};
 
 	const addContact = () => {
-		if (width > 880) {
-			setFormHeading('New contact');
-			setNameValue('');
-			setEmailValue('');
-			setPopupOpened(true);
-		}
-		if (width < 880) {
-			navigate('/contacts/add');
-		}
+		setFormHeading('New contact');
+		setNameValue('');
+		setEmailValue('');
+		setPopupOpened(true);
 	};
 
 	const editContact = () => {
@@ -143,7 +127,7 @@ const Contacts = () => {
 			setPopupOpened(true);
 		}
 		if (width < 880) {
-			navigate('/contacts/edit');
+			navigate(`/contact/edit/${user.id}`);
 		}
 	};
 
@@ -158,132 +142,102 @@ const Contacts = () => {
 	};
 
 	return (
-		<>
-			{width < 880 && tab === 'contacts' && (
-				<Header
-					heading="Contacts"
-					extension={<AddContactIcon />}
-					onChevronClick={() => navigate('/chats')}
-					onExtensionClick={() => addContact()}
-				/>
-			)}
-			{width < 880 && tab === 'contact' && (
-				<Header heading="Profile" onChevronClick={() => setTab('contacts')} />
-			)}
-			<main className={s.contacts}>
-				{isPopupOpened && (
-					<Popup
-						heading={formHeading}
+		<main className={s.contacts}>
+			{isPopupOpened && (
+				<Popup
+					heading={formHeading}
+					onSubmit={submitPopup}
+					onClose={() => setPopupOpened(false)}
+				>
+					<Form
+						buttonText="Save"
+						nameValue={nameValue}
+						emailValue={emailValue}
+						onNameChange={(e) => setNameValue(e.target.value)}
+						onEmailChange={(e) => setEmailValue(e.target.value)}
 						onSubmit={submitPopup}
-						onClose={() => setPopupOpened(false)}
-					>
-						<div className={s.form__inputs}>
-							<Input
-								name="name"
-								placeholder="Name"
-								maxLength={120}
-								required
-								onChange={(e) => setNameValue(e.target.value)}
-								value={nameValue}
+					/>
+				</Popup>
+			)}
+			<section className={s.contacts__list}>
+				<div className={s.contacts__searchbar}>
+					<Button
+						onClick={addContact}
+						content={<AddContactIcon color="#fcfcfc" />}
+					/>
+					<Input
+						placeholder="Search contacts"
+						value={searchValue}
+						onChange={(e) => search(e.target.value)}
+					/>
+				</div>
+				{contacts.length > 0 ? (
+					filteredContacts.map((contact) => {
+						return (
+							<UserInfo
+								key={contact.id}
+								type="contact"
+								id={contact.id}
+								name={contact.name}
+								avatar={contact.avatar}
+								selected={user.id === contact.id && width > 880}
+								onClick={() => contactAction(contact.id)}
 							/>
-							<Input
-								type="email"
-								name="email"
-								placeholder="Email"
-								maxLength={60}
-								required
-								onChange={(e) => setEmailValue(e.target.value)}
-								value={emailValue}
-							/>
-						</div>
-						<Button content="Save" type="submit" />
-					</Popup>
+						);
+					})
+				) : (
+					<div className={s.contacts__no_contacts}>
+						<p>
+							You don’t have contacts yet.&nbsp;{' '}
+							<button className={s.no_contacts__button} onClick={addContact}>
+								Create first contact
+							</button>
+						</p>
+					</div>
 				)}
-				{(showList || width > 880) && (
-					<section className={s.contacts__list}>
-						<div className={s.contacts__searchbar}>
-							<Button
-								onClick={addContact}
-								content={<AddContactIcon color="#fcfcfc" />}
+			</section>
+			{width > 880 && (
+				<section className={s.profile__tab}>
+					{contacts.length > 0 ? (
+						<>
+							<UserInfo
+								type="profile"
+								name={user.name}
+								avatar={user.avatar}
+								content={user.email}
+								onClick={editContact}
 							/>
-							<Input
-								placeholder="Search contacts"
-								value={searchValue}
-								onChange={(e) => search(e.target.value)}
-							/>
-						</div>
-						{contacts.length > 0 ? (
-							filteredContacts.map((contact) => {
-								return (
+							<ul className={s.profile__tab__list}>
+								<li key="message">
 									<UserInfo
-										key={contact.id}
-										type="contact"
-										id={contact.id}
-										name={contact.name}
-										avatar={contact.avatar}
-										selected={user.id === contact.id && width > 880}
-										onClick={() => contactAction(contact.id)}
+										type="link"
+										name="Write a message"
+										onClick={() => console.log('Write a message')}
 									/>
-								);
-							})
-						) : (
-							<div className={s.contacts__no_contacts}>
-								<p>
-									You don’t have contacts yet.&nbsp;{' '}
-									<button
-										className={s.no_contacts__button}
-										onClick={addContact}
-									>
-										Create first contact
-									</button>
-								</p>
-							</div>
-						)}
-					</section>
-				)}
-				{(showProfile || width > 880) && (
-					<section className={s.profile__tab}>
-						{contacts.length > 0 ? (
-							<>
-								<UserInfo
-									type="profile"
-									name={user.name}
-									avatar={user.avatar}
-									content={user.email}
-									onClick={editContact}
-								/>
-								<ul className={s.profile__tab__list}>
-									<li key="message">
-										<UserInfo
-											type="link"
-											name="Write a message"
-											onClick={() => console.log(`go to chat with this user`)}
-										/>
-									</li>
-									<li key="notifs">
-										<Toggler
-											content="Notifications"
-											checked={user.notifs}
-											onToggle={() => setNotifsGlobally(user.id)}
-										/>
-									</li>
-								</ul>
-								<button
-									className={s.profile__tab__button}
-									onClick={() => deleteContact(user.id)}
-								>
-									Delete contact
-								</button>
-							</>
-						) : (
-							<p className={s.profile__no_selection}>
-								Select a chat or a contact to start messaging
-							</p>
-						)}
-					</section>
-				)}
-			</main>
-		</>
+								</li>
+								<li key="notifs">
+									<Toggler
+										content="Notifications"
+										checked={user.notifs}
+										onToggle={() => setNotifsGlobally(user.id)}
+									/>
+								</li>
+							</ul>
+							<button
+								className={s.profile__tab__button}
+								onClick={() => deleteContact(user.id)}
+							>
+								Delete contact
+							</button>
+						</>
+					) : (
+						<p className={s.profile__no_selection}>
+							Select a chat or a contact to start messaging
+						</p>
+					)}
+				</section>
+			)}
+		</main>
 	);
 };
 
