@@ -119,6 +119,16 @@ main {
 	outline-offset: 0.1rem;
 }
 
+h1,
+h2,
+h3,
+h4,
+p {
+	word-break: break-word;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
 button {
 	margin: 0;
 	padding: 0;
