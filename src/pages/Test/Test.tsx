@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
-import { UserInfo } from '../../uikit/UserInfo/UserInfo';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Confirm } from '../../uikit/Confirm/Confirm';
 import { Form } from '../../components/Form/Form';
 
