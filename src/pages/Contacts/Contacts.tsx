@@ -11,6 +11,7 @@ import s from './styles.module.css';
 
 import fetchedContacts from '../../mockData/contacts.json';
 import { Form } from '../../components/Form/Form';
+import { Header } from '../../components/Header/Header';
 
 const Contacts = () => {
 	const navigate = useNavigate();
@@ -142,102 +143,112 @@ const Contacts = () => {
 	};
 
 	return (
-		<main className={s.contacts}>
-			{isPopupOpened && (
-				<Popup
-					heading={formHeading}
-					onSubmit={submitPopup}
-					onClose={() => setPopupOpened(false)}
-				>
-					<Form
-						buttonText="Save"
-						nameValue={nameValue}
-						emailValue={emailValue}
-						onNameChange={(e) => setNameValue(e.target.value)}
-						onEmailChange={(e) => setEmailValue(e.target.value)}
-						onSubmit={submitPopup}
-					/>
-				</Popup>
+		<>
+			{width < 880 && (
+				<Header
+					heading="Contacts"
+					extension={<AddContactIcon />}
+					onChevronClick={() => navigate('/chats')}
+					onExtensionClick={() => navigate('/contacts/create')}
+				/>
 			)}
-			<section className={s.contacts__list}>
-				<div className={s.contacts__searchbar}>
-					<Button
-						onClick={addContact}
-						content={<AddContactIcon color="#fcfcfc" />}
-					/>
-					<Input
-						placeholder="Search contacts"
-						value={searchValue}
-						onChange={(e) => search(e.target.value)}
-					/>
-				</div>
-				{contacts.length > 0 ? (
-					filteredContacts.map((contact) => {
-						return (
-							<UserInfo
-								key={contact.id}
-								type="contact"
-								id={contact.id}
-								name={contact.name}
-								avatar={contact.avatar}
-								selected={user.id === contact.id && width > 880}
-								onClick={() => contactAction(contact.id)}
-							/>
-						);
-					})
-				) : (
-					<div className={s.contacts__no_contacts}>
-						<p>
-							You don’t have contacts yet.&nbsp;{' '}
-							<button className={s.no_contacts__button} onClick={addContact}>
-								Create first contact
-							</button>
-						</p>
-					</div>
+			<main className={s.contacts}>
+				{isPopupOpened && (
+					<Popup
+						heading={formHeading}
+						onSubmit={submitPopup}
+						onClose={() => setPopupOpened(false)}
+					>
+						<Form
+							buttonText="Save"
+							nameValue={nameValue}
+							emailValue={emailValue}
+							onNameChange={(e) => setNameValue(e.target.value)}
+							onEmailChange={(e) => setEmailValue(e.target.value)}
+							onSubmit={submitPopup}
+						/>
+					</Popup>
 				)}
-			</section>
-			{width > 880 && (
-				<section className={s.profile__tab}>
+				<section className={s.contacts__list}>
+					<div className={s.contacts__searchbar}>
+						<Button
+							onClick={addContact}
+							content={<AddContactIcon color="#fcfcfc" />}
+						/>
+						<Input
+							placeholder="Search contacts"
+							value={searchValue}
+							onChange={(e) => search(e.target.value)}
+						/>
+					</div>
 					{contacts.length > 0 ? (
-						<>
-							<UserInfo
-								type="profile"
-								name={user.name}
-								avatar={user.avatar}
-								content={user.email}
-								onClick={editContact}
-							/>
-							<ul className={s.profile__tab__list}>
-								<li key="message">
-									<UserInfo
-										type="link"
-										name="Write a message"
-										onClick={() => console.log('Write a message')}
-									/>
-								</li>
-								<li key="notifs">
-									<Toggler
-										content="Notifications"
-										checked={user.notifs}
-										onToggle={() => setNotifsGlobally(user.id)}
-									/>
-								</li>
-							</ul>
-							<button
-								className={s.profile__tab__button}
-								onClick={() => deleteContact(user.id)}
-							>
-								Delete contact
-							</button>
-						</>
+						filteredContacts.map((contact) => {
+							return (
+								<UserInfo
+									key={contact.id}
+									type="contact"
+									id={contact.id}
+									name={contact.name}
+									avatar={contact.avatar}
+									selected={user.id === contact.id && width > 880}
+									onClick={() => contactAction(contact.id)}
+								/>
+							);
+						})
 					) : (
-						<p className={s.profile__no_selection}>
-							Select a chat or a contact to start messaging
-						</p>
+						<div className={s.contacts__no_contacts}>
+							<p>
+								You don’t have contacts yet.&nbsp;{' '}
+								<button className={s.no_contacts__button} onClick={addContact}>
+									Create first contact
+								</button>
+							</p>
+						</div>
 					)}
 				</section>
-			)}
-		</main>
+				{width > 880 && (
+					<section className={s.profile__tab}>
+						{contacts.length > 0 ? (
+							<>
+								<UserInfo
+									type="profile"
+									name={user.name}
+									avatar={user.avatar}
+									content={user.email}
+									onClick={editContact}
+								/>
+								<ul className={s.profile__tab__list}>
+									<li key="message">
+										<UserInfo
+											type="link"
+											name="Write a message"
+											onClick={() => console.log('Write a message')}
+										/>
+									</li>
+									<li key="notifs">
+										<Toggler
+											content="Notifications"
+											checked={user.notifs}
+											onToggle={() => setNotifsGlobally(user.id)}
+										/>
+									</li>
+								</ul>
+								<button
+									className={s.profile__tab__button}
+									onClick={() => deleteContact(user.id)}
+								>
+									Delete contact
+								</button>
+							</>
+						) : (
+							<p className={s.profile__no_selection}>
+								Select a chat or a contact to start messaging
+							</p>
+						)}
+					</section>
+				)}
+			</main>
+		</>
 	);
 };
 
