@@ -6,6 +6,7 @@ import Auth from './pages/Auth/Auth';
 import Contacts from './pages/Contacts/Contacts';
 import Contact from './pages/mobile/Contact/Contact';
 import Chats from './pages/Chats/Chats';
+import NotFound from './pages/NotFound/NotFound';
 import BasicInfoFormPage from './pages/mobile/BasicInfoFormPage/BasicInfoFormPage';
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
 				<Route path="/contact/edit/:id" element={<BasicInfoFormPage />} />
 				<Route path="/settings/profile/edit" element={<BasicInfoFormPage />} />
 				<Route path="/chats" element={<Chats />} />
+
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);

@@ -1,0 +1,10 @@
+.main {
+	padding: var(--offset-horizonal) var(--offset-vertical);
+
+	display: flex;
+	flex-direction: column;
+}
+
+.buttonContainer {
+	margin-top: 1rem;
+}
