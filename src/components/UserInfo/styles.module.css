@@ -1,5 +1,5 @@
 .userInfo {
-	padding: var(--offset-vertical) var(--offset-horizonal);
+	padding: var(--offset-vertical) var(--offset-horizontal);
 }
 .userInfo:active {
 	background-color: var(--fill);
@@ -92,7 +92,7 @@
 
 @media (width < 880px) {
 	.userInfo {
-		padding: var(--offset-vertical) var(--offset-horizonal);
+		padding: var(--offset-vertical) var(--offset-horizontal);
 	}
 
 	.userInfo svg {

@@ -15,7 +15,7 @@
 }
 
 .confirm button {
-	padding: var(--offset-vertical) var(--offset-horizonal);
+	padding: var(--offset-vertical) var(--offset-horizontal);
 
 	flex: 1;
 

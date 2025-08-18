@@ -1,5 +1,5 @@
 .main {
-	padding: var(--offset-horizonal) var(--offset-vertical);
+	padding: var(--offset-horizontal) var(--offset-vertical);
 
 	display: flex;
 	flex-direction: column;

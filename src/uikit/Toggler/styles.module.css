@@ -1,5 +1,5 @@
 .toggler {
-	padding: var(--offset-vertical) var(--offset-horizonal);
+	padding: var(--offset-vertical) var(--offset-horizontal);
 
 	display: flex;
 	align-items: center;
@@ -35,6 +35,6 @@
 
 @media (width < 880px) {
 	.toggler {
-		padding: var(--offset-vertical) var(--offset-horizonal);
+		padding: var(--offset-vertical) var(--offset-horizontal);
 	}
 }

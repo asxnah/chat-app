@@ -15,7 +15,7 @@
 	background-color: var(--white);
 
 	/* dimensions */
-	--offset-horizonal: 32px;
+	--offset-horizontal: 32px;
 	--offset-vertical: 12px;
 	--width: 512px;
 
@@ -93,7 +93,7 @@
 }
 @media (max-width: 880px) {
 	:root {
-		--offset-horizonal: 16px;
+		--offset-horizontal: 16px;
 		--width: 300px;
 	}
 }

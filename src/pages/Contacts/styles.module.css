@@ -11,7 +11,7 @@
 }
 
 .contacts__searchbar {
-	margin: 12px var(--offset-horizonal);
+	margin: 12px var(--offset-horizontal);
 
 	display: flex;
 	gap: 16px;
@@ -24,7 +24,7 @@
 
 .contacts__searchbar input {
 	/* учитываем margin и padding */
-	width: calc(100% - var(--offset-horizonal) - 16px);
+	width: calc(100% - var(--offset-horizontal) - 16px);
 }
 
 .profile__tab {
@@ -42,7 +42,7 @@
 }
 
 .profile__tab__button {
-	margin: var(--offset-vertical) var(--offset-horizonal);
+	margin: var(--offset-vertical) var(--offset-horizontal);
 	text-align: left;
 	color: var(--red);
 }
@@ -71,7 +71,7 @@
 
 @media (width < 880px) {
 	.contacts__searchbar {
-		margin: 0 var(--offset-horizonal);
+		margin: 0 var(--offset-horizontal);
 	}
 	.contacts__searchbar input {
 		width: 100%;
