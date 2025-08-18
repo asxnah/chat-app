@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useWindowWidth from './hooks/useWindowWidth';
+import { TabBar } from './components/TabBar/TabBar';
 import Test from './pages/Test/Test';
 import Auth from './pages/Auth/Auth';
 import Contacts from './pages/Contacts/Contacts';
-import BasicInfoFormPage from './pages/mobile/BasicInfoFormPage/BasicInfoFormPage';
 import Contact from './pages/mobile/Contact/Contact';
-import { TabBar } from './components/TabBar/TabBar';
+import Chats from './pages/Chats/Chats';
+import BasicInfoFormPage from './pages/mobile/BasicInfoFormPage/BasicInfoFormPage';
 
 function App() {
 	const width = useWindowWidth();
@@ -20,6 +21,7 @@ function App() {
 				<Route path="/contact/:id" element={<Contact />} />
 				<Route path="/contact/edit/:id" element={<BasicInfoFormPage />} />
 				<Route path="/settings/profile/edit" element={<BasicInfoFormPage />} />
+				<Route path="/chats" element={<Chats />} />
 			</Routes>
 		</BrowserRouter>
 	);
