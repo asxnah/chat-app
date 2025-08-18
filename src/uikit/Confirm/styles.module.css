@@ -33,3 +33,9 @@
 .confirm div button:first-of-type {
 	color: var(--red);
 }
+
+@media (width < 360px) {
+	.confirm {
+		width: 80%;
+	}
+}
