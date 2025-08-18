@@ -94,4 +94,9 @@
 	.userInfo {
 		padding: var(--offset-vertical) var(--offset-horizonal);
 	}
+
+	.userInfo svg {
+		width: 16px;
+		height: 16px;
+	}
 }
