@@ -81,9 +81,7 @@ const Contacts = () => {
 		if (width < 880) navigate(`/contact/${id}`);
 	};
 
-	const submitPopup = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
+	const submitPopup = () => {
 		if (formHeading === 'New contact') {
 			const newContact: Contact = {
 				id: Date.now().toString(), // placeholder => db search
@@ -95,8 +93,8 @@ const Contacts = () => {
 			};
 			setContacts([...contacts, newContact]);
 			setUser(newContact);
-			setNameValue(newContact.name);
-			setEmailValue(newContact.email);
+			setNameValue('');
+			setEmailValue('');
 			setPopupOpened(false);
 		}
 
@@ -125,6 +123,8 @@ const Contacts = () => {
 	const editContact = () => {
 		if (width > 880) {
 			setFormHeading('Edit contact');
+			setNameValue(user.name);
+			setEmailValue(user.email);
 			setPopupOpened(true);
 		}
 		if (width < 880) {
@@ -137,8 +137,6 @@ const Contacts = () => {
 		setContacts(updatedContacts);
 		if (updatedContacts.length > 0) {
 			setUser(updatedContacts[0]);
-			setNameValue(updatedContacts[0].name);
-			setEmailValue(updatedContacts[0].email);
 		}
 	};
 
@@ -154,11 +152,7 @@ const Contacts = () => {
 			)}
 			<main className={s.contacts}>
 				{isPopupOpened && (
-					<Popup
-						heading={formHeading}
-						onSubmit={submitPopup}
-						onClose={() => setPopupOpened(false)}
-					>
+					<Popup heading={formHeading} onClose={() => setPopupOpened(false)}>
 						<Form
 							buttonText="Save"
 							nameValue={nameValue}
