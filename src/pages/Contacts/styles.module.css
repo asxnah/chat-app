@@ -1,4 +1,4 @@
-.contacts {
+.main {
 	height: 100vh;
 
 	display: grid;
@@ -80,7 +80,7 @@
 		display: none;
 	}
 
-	.contacts {
+	.main {
 		display: block;
 	}
 	.profile__tab {

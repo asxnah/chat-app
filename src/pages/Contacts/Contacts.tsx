@@ -150,7 +150,7 @@ const Contacts = () => {
 					onExtensionClick={() => navigate('/contacts/create')}
 				/>
 			)}
-			<main className={s.contacts}>
+			<main className={s.main}>
 				{isPopupOpened && (
 					<Popup heading={formHeading} onClose={() => setPopupOpened(false)}>
 						<Form
