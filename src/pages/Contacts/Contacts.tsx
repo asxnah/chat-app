@@ -163,8 +163,8 @@ const Contacts = () => {
 						/>
 					</Popup>
 				)}
-				<section className={s.contacts__list}>
-					<div className={s.contacts__searchbar}>
+				<section className={s.contactsList}>
+					<div className={s.searchbar}>
 						<Button
 							onClick={addContact}
 							content={<AddContactIcon color="#fcfcfc" />}
@@ -190,10 +190,10 @@ const Contacts = () => {
 							);
 						})
 					) : (
-						<div className={s.contacts__no_contacts}>
+						<div className={s.noContacts}>
 							<p>
 								You don’t have contacts yet.&nbsp;{' '}
-								<button className={s.no_contacts__button} onClick={addContact}>
+								<button className={s.noContacts__button} onClick={addContact}>
 									Create first contact
 								</button>
 							</p>
@@ -201,7 +201,7 @@ const Contacts = () => {
 					)}
 				</section>
 				{width > 880 && (
-					<section className={s.profile__tab}>
+					<section className={s.profileTab}>
 						{contacts.length > 0 ? (
 							<>
 								<UserInfo
@@ -211,7 +211,7 @@ const Contacts = () => {
 									content={user.email}
 									onClick={editContact}
 								/>
-								<ul className={s.profile__tab__list}>
+								<ul className={s.profileTab__list}>
 									<li key="message">
 										<UserInfo
 											type="link"
@@ -228,14 +228,14 @@ const Contacts = () => {
 									</li>
 								</ul>
 								<button
-									className={s.profile__tab__button}
+									className={s.profileTab__button}
 									onClick={() => deleteContact(user.id)}
 								>
 									Delete contact
 								</button>
 							</>
 						) : (
-							<p className={s.profile__no_selection}>
+							<p className={s.profileTab__noSelection}>
 								Select a chat or a contact to start messaging
 							</p>
 						)}

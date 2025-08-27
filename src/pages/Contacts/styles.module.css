@@ -5,29 +5,29 @@
 	grid-template-columns: minmax(200px, 480px) minmax(200px, 100%);
 }
 
-.contacts__list {
+.contactsList {
 	height: 100%;
 	overflow-y: scroll;
 }
 
-.contacts__searchbar {
+.searchbar {
 	margin: 12px var(--offset-horizontal);
 
 	display: flex;
 	gap: 16px;
 }
 
-.contacts__searchbar button {
+.searchbar button {
 	display: grid;
 	place-content: center;
 }
 
-.contacts__searchbar input {
+.searchbar input {
 	/* учитываем margin и padding */
 	width: calc(100% - var(--offset-horizontal) - 16px);
 }
 
-.profile__tab {
+.profileTab {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
@@ -35,29 +35,29 @@
 	border-left: 1px solid var(--stroke);
 }
 
-.profile__tab__list {
+.profileTab__list {
 	padding: 0;
 
 	list-style-type: none;
 }
 
-.profile__tab__button {
+.profileTab__button {
 	margin: var(--offset-vertical) var(--offset-horizontal);
 	text-align: left;
 	color: var(--red);
 }
 
-.profile__no_selection {
+.profileTab__noSelection {
 	margin: auto 32px 32px 32px;
 	color: var(--darkgrey);
 	text-align: center;
 	font-size: 16px;
 }
 
-.contacts__no_contacts {
+.noContacts {
 	padding: 12px 32px;
 }
-.no_contacts__button {
+.noContacts__button {
 	display: block;
 	text-decoration: underline;
 	text-underline-offset: 4px;
@@ -70,20 +70,20 @@
 }
 
 @media (width < 880px) {
-	.contacts__searchbar {
+	.searchbar {
 		margin: 0 var(--offset-horizontal);
 	}
-	.contacts__searchbar input {
+	.searchbar input {
 		width: 100%;
 	}
-	.contacts__searchbar button {
+	.searchbar button {
 		display: none;
 	}
 
 	.main {
 		display: block;
 	}
-	.profile__tab {
+	.profileTab {
 		display: none;
 	}
 }
