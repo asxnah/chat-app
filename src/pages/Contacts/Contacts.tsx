@@ -1,17 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useWindowWidth from '../../hooks/useWindowWidth';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
 import { AddContactIcon } from '../../assets/icons/AddContactIcon';
 import { Popup } from '../../components/Popup/Popup';
-import useWindowWidth from '../../hooks/useWindowWidth';
+import { Form } from '../../components/Form/Form';
+import { Header } from '../../components/Header/Header';
 import s from './styles.module.css';
 
 import fetchedContacts from '../../mockData/contacts.json';
-import { Form } from '../../components/Form/Form';
-import { Header } from '../../components/Header/Header';
 
 const Contacts = () => {
 	const navigate = useNavigate();
