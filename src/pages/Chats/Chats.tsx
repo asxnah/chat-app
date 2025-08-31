@@ -57,7 +57,7 @@ const Chats = () => {
 		if (width < 880) navigate(`/chat/${id}`);
 	};
 
-	function formatDateTime(isoString: string): string {
+	const formatDateTime = (isoString: string): string => {
 		const date = new Date(isoString);
 		const now = new Date();
 
@@ -95,7 +95,11 @@ const Chats = () => {
 		}
 
 		return formatDate(date);
-	}
+	};
+
+	const AddChat = () => {
+		return;
+	};
 
 	return (
 		<>
@@ -114,25 +118,11 @@ const Chats = () => {
 						value={searchValue}
 						onChange={(e) => search(e.target.value)}
 					/>
-					{chats.length > 0 ? (
-						filteredChats.map((chat) => {
-							return (
-								<UserInfo
-									key={chat.id}
-									type="message"
-									id={chat.id}
-									name={chat.name}
-									avatar={chat.avatar}
-									selected={chat.id === chat.id && width > 880}
-									onClick={() => chatAction(chat.id)}
-								/>
-							);
-						})
-					) : (
-						<div className={s.noContacts}>
+					{chats.length === 0 && (
+						<div className={s.noChats}>
 							<p>
 								You don’t have chats yet.&nbsp;{' '}
-								<button className={s.noContacts__button} onClick={addContact}>
+								<button className={s.noChats__button} onClick={AddChat}>
 									Create first contact
 								</button>
 							</p>
