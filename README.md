@@ -1,3 +1,10 @@
-# React + TypeScript + Vite
+# chatapp docs
 
-# npm run dev
+## регистрация/вход
+
+верный код - 0000
+неверный код - 1234
+
+## запуск
+
+`npm run dev`
