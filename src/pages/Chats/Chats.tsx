@@ -115,6 +115,7 @@ const Chats = () => {
 			<main className={s.main}>
 				<section className={s.chats}>
 					<Input
+						name="search"
 						placeholder="Search chats"
 						value={searchValue}
 						onChange={(e) => search(e.target.value)}

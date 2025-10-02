@@ -1,29 +1,39 @@
-import type { InputHTMLAttributes } from 'react';
+import type { ChangeEvent } from 'react';
 import s from './styles.module.css';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-	placeholder: string;
+interface InputProps {
+	name: string;
 	value: string;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	placeholder?: string;
+	id?: string;
 	type?: 'text' | 'email';
-	name?: string;
+	minLength?: number;
+	maxLength?: number;
+	autoComplete?: 'email' | 'off';
 }
 
 export const Input = ({
-	placeholder,
+	name,
 	value,
+	onChange,
+	placeholder = name,
+	id = name,
 	type = 'text',
-	name = 'input',
-	...rest
+	minLength = 1,
+	maxLength = 255,
 }: InputProps) => {
 	return (
 		<input
 			name={name}
+			id={id}
 			type={type}
 			value={value}
+			onChange={onChange}
 			placeholder={placeholder}
 			className={s.input}
-			{...rest}
-			minLength={1}
+			minLength={minLength}
+			maxLength={maxLength}
 			required
 		/>
 	);

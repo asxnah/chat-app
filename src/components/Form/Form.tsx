@@ -27,8 +27,14 @@ export const Form = ({
 	return (
 		<form className={s.form} onSubmit={submit}>
 			<div className={s.form__inputs}>
-				<Input placeholder="Name" value={nameValue} onChange={onNameChange} />
 				<Input
+					name="name"
+					placeholder="Name"
+					value={nameValue}
+					onChange={onNameChange}
+				/>
+				<Input
+					name="email"
 					type="email"
 					placeholder="email@example.com"
 					value={emailValue}

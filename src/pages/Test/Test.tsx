@@ -87,6 +87,7 @@ const Test = () => {
 				>
 					<Button content="Button" onClick={() => alert('clicked')} />
 					<Input
+						name="example"
 						placeholder="Placeholder"
 						value={value}
 						onChange={(e) => setValue(e.target.value)}

@@ -170,6 +170,7 @@ const Contacts = () => {
 							content={<AddContactIcon color="#fcfcfc" />}
 						/>
 						<Input
+							name="search"
 							placeholder="Search contacts"
 							value={searchValue}
 							onChange={(e) => search(e.target.value)}

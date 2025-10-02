@@ -89,6 +89,7 @@ const Auth = () => {
 							}}
 						>
 							<Input
+								name="email"
 								type="email"
 								autoComplete="email"
 								placeholder="email@example.com"
