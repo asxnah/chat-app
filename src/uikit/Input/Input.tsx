@@ -4,7 +4,7 @@ import s from './styles.module.css';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	placeholder: string;
 	value: string;
-	type?: string;
+	type?: 'text' | 'email';
 	name?: string;
 }
 

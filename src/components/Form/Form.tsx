@@ -29,6 +29,7 @@ export const Form = ({
 			<div className={s.form__inputs}>
 				<Input placeholder="Name" value={nameValue} onChange={onNameChange} />
 				<Input
+					type="email"
 					placeholder="email@example.com"
 					value={emailValue}
 					onChange={onEmailChange}
