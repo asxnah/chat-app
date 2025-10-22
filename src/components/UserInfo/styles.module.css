@@ -1,5 +1,5 @@
 .userInfo {
-	padding: var(--offset-vertical) var(--offset-horizontal);
+	padding: 0.75rem 2rem;
 }
 .userInfo:active {
 	background-color: var(--fill);

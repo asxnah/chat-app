@@ -15,8 +15,6 @@
 	background-color: var(--white);
 
 	/* dimensions */
-	--offset-horizontal: 2rem;
-	--offset-vertical: 0.75rem;
 	--width: 32rem;
 
 	/* scrollbar */

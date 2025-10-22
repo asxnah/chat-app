@@ -11,7 +11,7 @@
 }
 
 .searchbar {
-	margin: 0.75rem var(--offset-horizontal);
+	margin: 0.75rem 2rem;
 
 	display: flex;
 	gap: 1rem;
@@ -23,7 +23,7 @@
 }
 
 .searchbar input {
-	width: calc(100% - var(--offset-horizontal) - 1rem);
+	width: calc(100% - 2rem - 1rem);
 }
 
 .profileTab {
@@ -41,7 +41,7 @@
 }
 
 .profileTab__button {
-	margin: var(--offset-vertical) var(--offset-horizontal);
+	margin: 0.75rem 2rem;
 	text-align: left;
 	color: var(--red);
 }
