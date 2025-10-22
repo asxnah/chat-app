@@ -3,7 +3,6 @@ import {
 	useRef,
 	useState,
 	type KeyboardEvent,
-	type ChangeEvent,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,27 +13,22 @@ import s from './styles.module.css';
 const Auth = () => {
 	const navigate = useNavigate();
 
-	const [step, setStep] = useState<'email' | 'code'>(() => {
-		const localStep = localStorage.getItem('step');
-		return localStep === 'email' || localStep === 'code' ? localStep : 'email';
-	});
+	const [step, setStep] = useState<'email' | 'code'>(() =>
+		localStorage.getItem('step') === 'email' ? 'email' : 'code'
+	);
 	const [email, setEmail] = useState<string>(
 		localStorage.getItem('email') || ''
 	);
-	const [code, setCode] = useState<string[]>(new Array(4).fill(''));
+	const [code, setCode] = useState<string[]>(['', '', '', '']);
 	const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
 	const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
-	const handleCodeChange = (e: ChangeEvent<HTMLInputElement>, i: number) => {
-		const value = e.target.value;
-
+	const handleCodeChange = (value: string, i: number) => {
 		const newCode = [...code];
 		newCode[i] = value;
 		setCode(newCode);
 
-		if (value) {
-			inputsRef.current[i + 1]?.focus();
-		}
+		if (value) inputsRef.current[i + 1]?.focus();
 	};
 
 	const handleCodeBackspace = (
@@ -50,25 +44,28 @@ const Auth = () => {
 		if (step === 'code') {
 			setCode(['', '', '', '']);
 		}
-
 		setStep(step);
-		localStorage.setItem('step', step);
 	};
 
 	useEffect(() => {
-		if (code.join('') === '1234') {
-			setIsIncorrect(true);
-		}
-
 		if (code.join('') === '0000') {
 			navigate('/contacts');
+		}
+		if (code.join('') !== '' && code.every((digit) => digit !== '')) {
+			setIsIncorrect(true);
+		} else {
+			setIsIncorrect(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [code]);
 
 	useEffect(() => {
-		inputsRef.current = inputsRef.current.slice(0, code.length);
-	}, [code.length]);
+		localStorage.setItem('step', step);
+	}, [step]);
+
+	useEffect(() => {
+		localStorage.setItem('email', email);
+	}, [email]);
 
 	return (
 		<main className={s.auth}>
@@ -99,13 +96,13 @@ const Auth = () => {
 								value={email}
 								onChange={(e) => {
 									setEmail(e.target.value);
-									localStorage.setItem('email', e.target.value);
 								}}
 							/>
 							<Button type="submit" content="Log in" disabled={email === ''} />
 						</form>
 					</motion.section>
 				)}
+
 				{step === 'code' && (
 					<motion.section
 						key="code"
@@ -137,7 +134,7 @@ const Auth = () => {
 											value={value}
 											minLength={1}
 											maxLength={1}
-											onChange={(e) => handleCodeChange(e, i)}
+											onChange={(e) => handleCodeChange(e.target.value, i)}
 											onKeyDown={(e) => handleCodeBackspace(e, i)}
 											ref={(el) => {
 												inputsRef.current[i] = el;
