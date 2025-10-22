@@ -13,21 +13,18 @@ const Chats = () => {
 	}
 
 	interface Chat {
-		id: string;
-		interlocutor_id: string;
-		chat_data: Message[] | null;
+		user_id: string;
+		chat_data: Message[] | [];
 	}
 
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [chat, setChat] = useState<Chat>({
-		id: '',
-		interlocutor_id: '',
+		user_id: '',
 		chat_data: [],
 	});
 	const filteredChats = useMemo(() => {
 		return;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue, chats]);
 
 	useEffect(() => {
@@ -42,7 +39,7 @@ const Chats = () => {
 	};
 
 	const chatAction = (id: string) => {
-		const foundChat = chats.find((chat) => chat.id === id);
+		const foundChat = chats.find((chat) => chat.user_id === id);
 
 		if (!foundChat) return;
 		setChat(foundChat);
