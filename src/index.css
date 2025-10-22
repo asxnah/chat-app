@@ -92,11 +92,6 @@
 	--brilliant-rose-active: #ff66c0;
 }
 
-#root {
-	height: 100vh;
-	display: flex;
-}
-
 main {
 	width: 100%;
 }
