@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, MouseEvent } from 'react';
 import s from './styles.module.css';
 
 type ButtonProps = {
 	type?: 'button' | 'submit';
 	content: string | ReactNode;
 	disabled?: boolean;
-	onClick?: (e: React.MouseEvent) => void;
+	onClick?: (e: MouseEvent) => void;
 };
 
 export const Button = ({

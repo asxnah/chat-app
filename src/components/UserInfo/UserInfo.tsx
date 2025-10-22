@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import { ChevronRight } from './ChevronRight';
 import s from './styles.module.css';
 
@@ -11,7 +12,7 @@ type UserInfoProps = {
 	date?: string;
 	counter?: number;
 	selected?: boolean;
-	onClick?: (e: React.MouseEvent) => void;
+	onClick?: (e: MouseEvent) => void;
 };
 
 export const UserInfo = ({

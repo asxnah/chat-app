@@ -1,7 +1,7 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, HTMLAttributes } from 'react';
 import s from './styles.module.css';
 
-type TogglerProps = React.HTMLAttributes<HTMLDivElement> & {
+type TogglerProps = HTMLAttributes<HTMLDivElement> & {
 	content: string;
 	checked: boolean;
 	onToggle: (e: ChangeEvent<HTMLInputElement>) => void;

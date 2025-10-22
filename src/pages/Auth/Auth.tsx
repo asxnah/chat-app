@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+	useEffect,
+	useRef,
+	useState,
+	type KeyboardEvent,
+	type ChangeEvent,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Input } from '../../uikit/Input/Input';
@@ -19,10 +25,7 @@ const Auth = () => {
 	const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
 	const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
-	const handleCodeChange = (
-		e: React.ChangeEvent<HTMLInputElement>,
-		i: number
-	) => {
+	const handleCodeChange = (e: ChangeEvent<HTMLInputElement>, i: number) => {
 		const value = e.target.value;
 
 		const newCode = [...code];
@@ -35,7 +38,7 @@ const Auth = () => {
 	};
 
 	const handleCodeBackspace = (
-		e: React.KeyboardEvent<HTMLInputElement>,
+		e: KeyboardEvent<HTMLInputElement>,
 		i: number
 	) => {
 		if (e.key === 'Backspace' && code[i] === '') {

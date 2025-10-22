@@ -1,3 +1,4 @@
+import type { ChangeEvent, FormEvent } from 'react';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
 import s from './styles.module.css';
@@ -6,9 +7,9 @@ interface FormProps {
 	buttonText: string;
 	nameValue: string;
 	emailValue: string;
-	onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	onNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	onEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 export const Form = ({
@@ -19,7 +20,7 @@ export const Form = ({
 	onEmailChange,
 	onSubmit,
 }: FormProps) => {
-	const submit = (e: React.FormEvent<HTMLFormElement>) => {
+	const submit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		onSubmit(e);
 	};

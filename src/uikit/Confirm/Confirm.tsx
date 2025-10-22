@@ -1,9 +1,10 @@
+import type { MouseEvent } from 'react';
 import s from './styles.module.css';
 
 interface ConfirmProps {
 	content: string;
-	onConfirm: (e: React.MouseEvent) => void;
-	onDecline: (e: React.MouseEvent) => void;
+	onConfirm: (e: MouseEvent) => void;
+	onDecline: (e: MouseEvent) => void;
 }
 
 export const Confirm = ({ content, onConfirm, onDecline }: ConfirmProps) => {
