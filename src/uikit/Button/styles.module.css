@@ -3,7 +3,7 @@
 
 	border: none;
 	border-radius: 1rem;
-	background: var(--mainColor);
+	background: var(--black);
 
 	color: var(--white, #fcfcfc);
 	font-size: 1rem;
@@ -20,7 +20,7 @@
 }
 .button:disabled:hover {
 	cursor: not-allowed;
-	background: var(--mainColor);
+	background: var(--black);
 }
 
 @media (hover: hover) {

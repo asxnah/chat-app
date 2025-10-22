@@ -76,7 +76,7 @@
 	place-content: center;
 
 	border-radius: 1.125rem;
-	background-color: var(--mainColor);
+	background-color: var(--black);
 }
 .counter span {
 	color: var(--white);

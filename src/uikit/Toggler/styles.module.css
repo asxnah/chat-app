@@ -23,7 +23,7 @@
 
 .checkbox input:checked + svg circle {
 	transform: translateX(1rem);
-	fill: var(--mainColor);
+	fill: var(--black);
 }
 
 @media (hover: hover) {
