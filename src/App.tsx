@@ -7,6 +7,7 @@ import Contacts from './pages/Contacts/Contacts';
 import Contact from './pages/mobile/Contact/Contact';
 import Chats from './pages/Chats/Chats';
 import BasicInfoFormPage from './pages/mobile/BasicInfoFormPage/BasicInfoFormPage';
+import './App.css';
 
 function App() {
 	return (
