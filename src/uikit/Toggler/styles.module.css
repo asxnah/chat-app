@@ -32,9 +32,3 @@
 		cursor: pointer;
 	}
 }
-
-@media (width < 880px) {
-	.toggler {
-		padding: var(--offset-vertical) var(--offset-horizontal);
-	}
-}

@@ -4,20 +4,9 @@
 	flex-direction: column;
 }
 
-@media (width > 880px) {
-	.form {
-		gap: 32px;
-	}
-	.form__inputs {
-		gap: 16px;
-	}
+.form {
+	gap: 32px;
 }
-
-@media (width < 880px) {
-	.form {
-		gap: 16px;
-	}
-	.form__inputs {
-		gap: 12px;
-	}
+.form__inputs {
+	gap: 16px;
 }

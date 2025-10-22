@@ -1,6 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useWindowWidth from '../../hooks/useWindowWidth';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
@@ -8,14 +6,11 @@ import { Toggler } from '../../uikit/Toggler/Toggler';
 import { AddContactIcon } from '../../assets/icons/AddContactIcon';
 import { Popup } from '../../components/Popup/Popup';
 import { Form } from '../../components/Form/Form';
-import { Header } from '../../components/Header/Header';
 import s from './styles.module.css';
 
 import fetchedContacts from '../../mockData/contacts.json';
 
 const Contacts = () => {
-	const navigate = useNavigate();
-
 	interface Contact {
 		id: string;
 		name: string;
@@ -40,7 +35,6 @@ const Contacts = () => {
 			  )
 			: contacts;
 	}, [searchValue, contacts]);
-	const width = useWindowWidth();
 	const [formHeading, setFormHeading] = useState<
 		'New contact' | 'Edit contact'
 	>('New contact');
@@ -78,7 +72,6 @@ const Contacts = () => {
 
 		if (!foundContact) return;
 		setUser(foundContact);
-		if (width < 880) navigate(`/contact/${id}`);
 	};
 
 	const submitPopup = () => {
@@ -121,15 +114,10 @@ const Contacts = () => {
 	};
 
 	const editContact = () => {
-		if (width > 880) {
-			setFormHeading('Edit contact');
-			setNameValue(user.name);
-			setEmailValue(user.email);
-			setPopupOpened(true);
-		}
-		if (width < 880) {
-			navigate(`/contact/edit/${user.id}`);
-		}
+		setFormHeading('Edit contact');
+		setNameValue(user.name);
+		setEmailValue(user.email);
+		setPopupOpened(true);
 	};
 
 	const deleteContact = (id: string) => {
@@ -142,14 +130,6 @@ const Contacts = () => {
 
 	return (
 		<>
-			{width < 880 && (
-				<Header
-					heading="Contacts"
-					extension={<AddContactIcon />}
-					onChevronClick={() => navigate('/chats')}
-					onExtensionClick={() => navigate('/contacts/create')}
-				/>
-			)}
 			<main className={s.main}>
 				{isPopupOpened && (
 					<Popup heading={formHeading} onClose={() => setPopupOpened(false)}>
@@ -185,7 +165,7 @@ const Contacts = () => {
 									id={contact.id}
 									name={contact.name}
 									avatar={contact.avatar}
-									selected={user.id === contact.id && width > 880}
+									selected={user.id === contact.id}
 									onClick={() => contactAction(contact.id)}
 								/>
 							);
@@ -201,47 +181,45 @@ const Contacts = () => {
 						</div>
 					)}
 				</section>
-				{width > 880 && (
-					<section className={s.profileTab}>
-						{contacts.length > 0 ? (
-							<>
-								<UserInfo
-									type="profile"
-									name={user.name}
-									avatar={user.avatar}
-									content={user.email}
-									onClick={editContact}
-								/>
-								<ul className={s.profileTab__list}>
-									<li key="message">
-										<UserInfo
-											type="link"
-											name="Write a message"
-											onClick={() => console.log('Write a message')}
-										/>
-									</li>
-									<li key="notifs">
-										<Toggler
-											content="Notifications"
-											checked={user.notifs}
-											onToggle={() => setNotifsGlobally(user.id)}
-										/>
-									</li>
-								</ul>
-								<button
-									className={s.profileTab__button}
-									onClick={() => deleteContact(user.id)}
-								>
-									Delete contact
-								</button>
-							</>
-						) : (
-							<p className={s.profileTab__noSelection}>
-								Select a chat or a contact to start messaging
-							</p>
-						)}
-					</section>
-				)}
+				<section className={s.profileTab}>
+					{contacts.length > 0 ? (
+						<>
+							<UserInfo
+								type="profile"
+								name={user.name}
+								avatar={user.avatar}
+								content={user.email}
+								onClick={editContact}
+							/>
+							<ul className={s.profileTab__list}>
+								<li key="message">
+									<UserInfo
+										type="link"
+										name="Write a message"
+										onClick={() => console.log('Write a message')}
+									/>
+								</li>
+								<li key="notifs">
+									<Toggler
+										content="Notifications"
+										checked={user.notifs}
+										onToggle={() => setNotifsGlobally(user.id)}
+									/>
+								</li>
+							</ul>
+							<button
+								className={s.profileTab__button}
+								onClick={() => deleteContact(user.id)}
+							>
+								Delete contact
+							</button>
+						</>
+					) : (
+						<p className={s.profileTab__noSelection}>
+							Select a chat or a contact to start messaging
+						</p>
+					)}
+				</section>
 			</main>
 		</>
 	);

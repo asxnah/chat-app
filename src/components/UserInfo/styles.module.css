@@ -89,14 +89,3 @@
 		cursor: pointer;
 	}
 }
-
-@media (width < 880px) {
-	.userInfo {
-		padding: var(--offset-vertical) var(--offset-horizontal);
-	}
-
-	.userInfo svg {
-		width: 16px;
-		height: 16px;
-	}
-}

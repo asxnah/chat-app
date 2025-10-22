@@ -69,21 +69,3 @@
 	gap: 16px;
 }
 
-@media (width < 880px) {
-	.searchbar {
-		margin: 0 var(--offset-horizontal);
-	}
-	.searchbar input {
-		width: 100%;
-	}
-	.searchbar button {
-		display: none;
-	}
-
-	.main {
-		display: block;
-	}
-	.profileTab {
-		display: none;
-	}
-}

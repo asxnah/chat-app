@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useWindowWidth from '../../hooks/useWindowWidth';
-
 import { Button } from '../../uikit/Button/Button';
 import { Input } from '../../uikit/Input/Input';
 import { Toggler } from '../../uikit/Toggler/Toggler';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Confirm } from '../../uikit/Confirm/Confirm';
 import { Form } from '../../components/Form/Form';
-
 import s from './styles.module.css';
-import { Header } from '../../components/Header/Header';
 
 const Test = () => {
-	const width = useWindowWidth();
 	const navigate = useNavigate();
 
 	const [checked, setChecked] = useState(false);
@@ -23,7 +18,6 @@ const Test = () => {
 
 	return (
 		<>
-			{width < 880 && <Header heading="Test" onChevronClick={() => {}} />}
 			<main className={s.main}>
 				<section className={s.main__section}>
 					<UserInfo
