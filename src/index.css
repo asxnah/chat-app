@@ -91,12 +91,6 @@
 	--brilliant-rose-hover: #f261b6;
 	--brilliant-rose-active: #ff66c0;
 }
-@media (max-width: 880px) {
-	:root {
-		--offset-horizontal: 16px;
-		--width: 300px;
-	}
-}
 
 #root {
 	height: 100vh;
