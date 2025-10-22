@@ -1,6 +1,6 @@
 .deleteButton {
 	padding: 0 var(--offset-horizontal);
-	margin-top: 32px;
+	margin-top: 2rem;
 
 	color: var(--red);
 }

@@ -77,7 +77,7 @@ const Test = () => {
 
 				<section
 					className={s.main__section}
-					style={{ display: 'flex', gap: '16px' }}
+					style={{ display: 'flex', gap: '1rem' }}
 				>
 					<Button content="Button" onClick={() => alert('clicked')} />
 					<Input
@@ -93,8 +93,8 @@ const Test = () => {
 					/>
 					<div
 						style={{
-							padding: '8px',
-							borderRadius: '16px',
+							padding: '0.5rem',
+							borderRadius: '1rem',
 							backgroundColor: 'var(--lightgrey)',
 						}}
 					>

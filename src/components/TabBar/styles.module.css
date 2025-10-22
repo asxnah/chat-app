@@ -17,7 +17,7 @@
 }
 
 .tab {
-	padding: 16px;
+	padding: 1rem;
 
 	opacity: 0.5;
 }
@@ -31,7 +31,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	gap: 8px;
+	gap: 0.5rem;
 }
 
 .tab span {

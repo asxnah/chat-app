@@ -1,5 +1,5 @@
 .header {
-	padding: 4px 16px 20px 16px;
+	padding: 0.25rem 1rem 1.25rem 1rem;
 
 	display: flex;
 	align-items: center;
@@ -7,8 +7,8 @@
 
 	button,
 	svg {
-		width: 24px;
-		height: 24px;
+		width: 1.5rem;
+		height: 1.5rem;
 	}
 }
 
@@ -16,7 +16,7 @@
 	position: relative;
 
 	h1 {
-		font-size: 24px;
+		font-size: 1.5rem;
 		font-weight: 600;
 	}
 	button {
@@ -35,10 +35,10 @@
 .chat {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 1rem;
 
 	h1 {
-		font-size: 20px;
+		font-size: 1.25rem;
 		font-weight: 700;
 	}
 	img {
@@ -53,7 +53,7 @@
 
 		display: flex;
 		align-items: center;
-		gap: 16px;
+		gap: 1rem;
 	}
 	div button {
 		position: absolute;

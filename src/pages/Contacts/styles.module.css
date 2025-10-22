@@ -2,7 +2,7 @@
 	height: 100vh;
 
 	display: grid;
-	grid-template-columns: minmax(200px, 480px) minmax(200px, 100%);
+	grid-template-columns: minmax(12.5rem, 30rem) minmax(12.5rem, 100%);
 }
 
 .contactsList {
@@ -11,10 +11,10 @@
 }
 
 .searchbar {
-	margin: 12px var(--offset-horizontal);
+	margin: 0.75rem var(--offset-horizontal);
 
 	display: flex;
-	gap: 16px;
+	gap: 1rem;
 }
 
 .searchbar button {
@@ -23,8 +23,7 @@
 }
 
 .searchbar input {
-	/* учитываем margin и padding */
-	width: calc(100% - var(--offset-horizontal) - 16px);
+	width: calc(100% - var(--offset-horizontal) - 1rem);
 }
 
 .profileTab {
@@ -32,7 +31,7 @@
 	flex-direction: column;
 	gap: 2rem;
 
-	border-left: 1px solid var(--stroke);
+	border-left: 0.063rem solid var(--stroke);
 }
 
 .profileTab__list {
@@ -48,24 +47,23 @@
 }
 
 .profileTab__noSelection {
-	margin: auto 32px 32px 32px;
+	margin: auto 2rem 2rem 2rem;
 	color: var(--darkgrey);
 	text-align: center;
-	font-size: 16px;
+	font-size: 1rem;
 }
 
 .noContacts {
-	padding: 12px 32px;
+	padding: 0.75rem 2rem;
 }
 .noContacts__button {
 	display: block;
 	text-decoration: underline;
-	text-underline-offset: 4px;
+	text-underline-offset: 0.25rem;
 }
 
 .form__inputs {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 1rem;
 }
-

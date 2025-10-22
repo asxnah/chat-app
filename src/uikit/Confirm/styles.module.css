@@ -1,13 +1,13 @@
 .confirm {
-	width: 300px;
+	width: 18.75rem;
 
-	border-radius: 12px;
+	border-radius: 0.75rem;
 	background-color: var(--white);
 	overflow: hidden;
 }
 
 .confirm p {
-	padding: 16px;
+	padding: 1rem;
 }
 
 .confirm div {
@@ -23,7 +23,7 @@
 	background: none;
 
 	text-align: center;
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 }
 .confirm button:active {
@@ -34,7 +34,7 @@
 	color: var(--red);
 }
 
-@media (width < 360px) {
+@media (width < 22.5rem) {
 	.confirm {
 		width: 80%;
 	}

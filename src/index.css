@@ -15,17 +15,17 @@
 	background-color: var(--white);
 
 	/* dimensions */
-	--offset-horizontal: 32px;
-	--offset-vertical: 12px;
-	--width: 512px;
+	--offset-horizontal: 2rem;
+	--offset-vertical: 0.75rem;
+	--width: 32rem;
 
 	/* scrollbar */
 	::-webkit-scrollbar {
-		width: 6px;
+		width: 0.375rem;
 		background-color: var(--white);
 	}
 	::-webkit-scrollbar-thumb {
-		border-radius: 6px;
+		border-radius: 0.375rem;
 		background-color: var(--stroke);
 	}
 
@@ -135,7 +135,7 @@ button {
 	border: none;
 	background: none;
 
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 }
 

@@ -1,13 +1,13 @@
 .input {
-	padding: 12px 16px;
+	padding: 0.75rem 1rem;
 
-	border: 1px solid var(--fill);
-	border-radius: 16px;
+	border: 0.0625rem solid var(--fill);
+	border-radius: 1rem;
 	background: var(--fill);
 	caret-color: var(--darkgrey);
 
 	color: var(--black);
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 }
 .input::placeholder {
