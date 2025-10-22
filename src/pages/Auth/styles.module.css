@@ -59,7 +59,7 @@
 	width: 2.875rem;
 	height: 2.875rem;
 
-	border: none;
+	border: 0.0625rem solid var(--fill);
 	border-radius: 1rem;
 	background: var(--fill);
 	caret-color: var(--darkgrey);
@@ -71,7 +71,8 @@
 }
 
 .digits__input:focus-visible {
-	outline: 0.0625rem solid var(--mainColor);
+	outline: none;
+	border-color: var(--lightgrey);
 }
 
 .digits__input::placeholder {
