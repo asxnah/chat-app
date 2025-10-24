@@ -8,7 +8,7 @@ type UserInfoProps = {
   name: string;
   avatar?: string;
   content?: string;
-  status: 'Typing...' | 'New chat' | 'Idle';
+  status?: 'Typing...' | 'New chat' | 'Idle';
   date?: string;
   counter?: number;
   selected?: boolean;
