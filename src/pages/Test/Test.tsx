@@ -121,13 +121,7 @@ const Test = () => {
             onEmailChange={(e) => setEmail(e.target.value)}
             onSubmit={() => alert('Submitted')}
           />
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(6, 1fr)',
-              gap: '1rem',
-            }}
-          >
+          <div className={s.icons}>
             <AddContactIcon />
             <BinIcon />
             <BugIcon />
