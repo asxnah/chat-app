@@ -7,10 +7,9 @@ type UserInfoProps = {
   id?: string;
   name: string;
   avatar?: string;
-  content?: string;
-  status?: 'Typing...' | 'New chat' | 'Idle';
+  content?: 'Typing...' | 'New chat' | string;
   date?: string;
-  counter?: number;
+  counter?: number | null;
   selected?: boolean;
   onClick?: (e: MouseEvent) => void;
 };
@@ -21,14 +20,13 @@ export const UserInfo = ({
   name,
   avatar,
   content,
-  status = 'Idle',
   date,
-  counter,
+  counter = null,
   selected,
   onClick,
 }: UserInfoProps) => {
   return (
-    <article
+    <div
       className={`${s.userInfo} ${s[type]} ${selected && s.selected}`}
       onClick={onClick}
       tabIndex={0}
@@ -42,9 +40,16 @@ export const UserInfo = ({
             {type === 'message' && <small>{date}</small>}
           </div>
           <div className={s.container}>
-            {content && <p>{content}</p>}
-            {status !== 'Idle' && <p className={s.status}>{status}</p>}
-            {counter && (
+            {content && (
+              <p
+                className={
+                  ['Typing...', 'New chat'].includes(content) ? s.status : ''
+                }
+              >
+                {content}
+              </p>
+            )}
+            {counter !== null && (
               <div className={s.counter}>
                 <span>{counter}</span>
               </div>
@@ -53,6 +58,6 @@ export const UserInfo = ({
         </div>
       </div>
       {(type === 'profile' || type === 'link') && <ChevronRight />}
-    </article>
+    </div>
   );
 };
