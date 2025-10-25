@@ -7,6 +7,17 @@ import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Confirm } from '../../uikit/Confirm/Confirm';
 import { Form } from '../../components/Form/Form';
 import s from './styles.module.css';
+import { AddContactIcon } from '../../assets/icons/AddContactIcon';
+import { BinIcon } from '../../assets/icons/BinIcon';
+import { BugIcon } from '../../assets/icons/BugIcon';
+import { ChatsIcon } from '../../assets/icons/ChatsIcon';
+import { ChevronLeft } from '../../assets/icons/ChevronLeft';
+import { ContactsIcon } from '../../assets/icons/ContactsIcon';
+import { CrossIcon } from '../../assets/icons/CrossIcon';
+import { PaletteIcon } from '../../assets/icons/PaletteIcon';
+import { PictureIcon } from '../../assets/icons/PictureIcon';
+import { SearchIcon } from '../../assets/icons/SearchIcon';
+import { UserIcon } from '../../assets/icons/UserIcon';
 
 const Test = () => {
   const navigate = useNavigate();
@@ -110,6 +121,25 @@ const Test = () => {
             onEmailChange={(e) => setEmail(e.target.value)}
             onSubmit={() => alert('Submitted')}
           />
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(6, 1fr)',
+              gap: '1rem',
+            }}
+          >
+            <AddContactIcon />
+            <BinIcon />
+            <BugIcon />
+            <ChatsIcon />
+            <ChevronLeft />
+            <ContactsIcon />
+            <CrossIcon />
+            <PaletteIcon />
+            <PictureIcon />
+            <SearchIcon />
+            <UserIcon />
+          </div>
         </section>
       </main>
     </>

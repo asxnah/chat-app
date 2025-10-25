@@ -160,7 +160,11 @@ const Chats = () => {
             );
           })}
         </section>
-        <section className={s.chat}></section>
+        <section className={s.chat}>
+          <header>
+            <h1>Yuuki Asuna</h1>
+          </header>
+        </section>
       </main>
     </>
   );

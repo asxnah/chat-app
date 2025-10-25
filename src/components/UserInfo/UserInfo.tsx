@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react';
-import { ChevronRight } from './ChevronRight';
+import { ChevronRight } from '../../assets/icons/ChevronRight';
 import s from './styles.module.css';
 
 type UserInfoProps = {
