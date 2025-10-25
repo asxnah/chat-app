@@ -2,36 +2,181 @@
   "chats": [
     {
       "chat_id": "1",
+      "user_id": "1",
       "chat_data": [
         {
           "user_id": 1,
           "msg": "Are you coming today?",
-          "time": "2025-08-27T11:30:00+05:00"
+          "time": "2025-08-27T11:30:00+05:00",
+          "read": true
         },
         {
           "user_id": 0,
           "msg": "Yes, I'll be there",
-          "time": "2025-08-27T11:35:00+05:00"
+          "time": "2025-08-27T11:35:00+05:00",
+          "read": true
         },
         {
           "user_id": 1,
           "msg": "Great! What time should I expect you?",
-          "time": "2025-08-27T11:36:00+05:00"
+          "time": "2025-08-27T11:36:00+05:00",
+          "read": true
         },
         {
           "user_id": 0,
           "msg": "Around 3 PM, got some work to finish first.",
-          "time": "2025-08-27T11:37:00+05:00"
+          "time": "2025-08-27T11:37:00+05:00",
+          "read": true
         },
         {
           "user_id": 1,
           "msg": "No problem, see you then!",
-          "time": "2025-08-27T11:38:00+05:00"
+          "time": "2025-08-27T11:38:00+05:00",
+          "read": true
         },
         {
           "user_id": 0,
           "msg": "Looking forward to it!",
-          "time": "2025-08-27T11:39:00+05:00"
+          "time": "2025-08-27T11:39:00+05:00",
+          "read": true
+        }
+      ]
+    },
+    {
+      "chat_id": "2",
+      "user_id": "2",
+      "chat_data": [
+        {
+          "user_id": 2,
+          "msg": "Good morning! Did you sleep well?",
+          "time": "2025-08-28T08:05:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "Yeah, pretty good! You?",
+          "time": "2025-08-28T08:07:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 2,
+          "msg": "Still sleepy",
+          "time": "2025-08-28T08:08:00+05:00",
+          "read": false
+        },
+        {
+          "user_id": 2,
+          "msg": "Need coffee ☕️",
+          "time": "2025-08-28T08:08:00+05:00",
+          "read": false
+        }
+      ]
+    },
+    {
+      "chat_id": "3",
+      "user_id": "3",
+      "chat_data": [
+        {
+          "user_id": 3,
+          "msg": "Hey, wanna watch something tonight?",
+          "time": "2025-08-29T20:15:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "Sure! What are we watching?",
+          "time": "2025-08-29T20:16:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 3,
+          "msg": "Maybe that new fantasy movie?",
+          "time": "2025-08-29T20:17:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "Perfect, I’ll bring snacks 🍿",
+          "time": "2025-08-29T20:18:00+05:00",
+          "read": true
+        }
+      ]
+    },
+    {
+      "chat_id": "4",
+      "user_id": "4",
+      "chat_data": [
+        {
+          "user_id": 4,
+          "msg": "Did you see the photos from yesterday?",
+          "time": "2025-08-30T10:42:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "Yes!! You looked amazing 😍",
+          "time": "2025-08-30T10:44:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 4,
+          "msg": "Aww thank you 💕 I loved that dress",
+          "time": "2025-08-30T10:46:00+05:00",
+          "read": true
+        }
+      ]
+    },
+    {
+      "chat_id": "5",
+      "user_id": "5",
+      "chat_data": [
+        {
+          "user_id": 5,
+          "msg": "Hey, are you free tomorrow afternoon?",
+          "time": "2025-09-02T14:05:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "Yeah, what’s up?",
+          "time": "2025-09-02T14:06:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 5,
+          "msg": "Thinking of getting bubble tea 🍡",
+          "time": "2025-09-02T14:07:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "I’m in 😋 what flavor this time?",
+          "time": "2025-09-02T14:08:00+05:00",
+          "read": true
+        }
+      ]
+    },
+    {
+      "chat_id": "6",
+      "user_id": "6",
+      "chat_data": [
+        {
+          "user_id": 6,
+          "msg": "It’s snowing here already ❄️",
+          "time": "2025-09-05T07:20:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 0,
+          "msg": "Really?! That’s so early 😮",
+          "time": "2025-09-05T07:22:00+05:00",
+          "read": true
+        },
+        {
+          "user_id": 6,
+          "msg": "Yeah, but it looks so pretty from my window ☃️",
+          "time": "2025-09-05T07:24:00+05:00",
+          "read": true
         }
       ]
     }
