@@ -28,3 +28,7 @@
 .searchbar input {
   width: calc(100%);
 }
+
+.chat {
+  border-left: 0.063rem solid var(--stroke);
+}

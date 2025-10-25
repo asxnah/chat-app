@@ -115,21 +115,24 @@ const Chats = () => {
     <>
       <main className={s.main}>
         <section className={s.chats}>
-          <div className={s.noChats}>
-            <p>You don't have chats yet</p>
-            <Button
-              content='Send your first message'
-              onClick={() => navigate('/contacts')}
-            />
-          </div>
-          <div className={s.searchbar}>
-            <Input
-              name='search'
-              placeholder='Search chats'
-              value={searchValue}
-              onChange={(e) => search(e.target.value)}
-            />
-          </div>
+          {chats.length > 0 ? (
+            <div className={s.searchbar}>
+              <Input
+                name='search'
+                placeholder='Search chats'
+                value={searchValue}
+                onChange={(e) => search(e.target.value)}
+              />
+            </div>
+          ) : (
+            <div className={s.noChats}>
+              <p>You don't have chats yet</p>
+              <Button
+                content='Send your first message'
+                onClick={() => navigate('/contacts')}
+              />
+            </div>
+          )}
 
           {chats.map((chat) => {
             const contact = getUser(chat.user_id);
