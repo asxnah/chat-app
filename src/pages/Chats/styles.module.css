@@ -1,2 +1,30 @@
 .main {
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: minmax(12.5rem, 30rem) minmax(12.5rem, 100%);
+}
+
+.noChats {
+  width: fit-content;
+  margin: 12px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chats {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.searchbar {
+  margin: 0.75rem 2rem;
+
+  display: flex;
+  gap: 1rem;
+}
+
+.searchbar input {
+  width: calc(100%);
 }

@@ -1,117 +1,166 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import type { Chat } from './types';
+import type { Contact } from './types';
 import { Input } from '../../uikit/Input/Input';
+import { Button } from '../../uikit/Button/Button';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
 import s from './styles.module.css';
 
-import fetchedChats from '../../mockData/chats.json';
-
 const Chats = () => {
-	interface Message {
-		user: boolean;
-		msg: string;
-		time: string;
-	}
+  const navigate = useNavigate();
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [chats, setChats] = useState<Chat[]>([]);
+  const [currentChat, setCurrentChat] = useState<Chat>({
+    chat_id: '',
+    user_id: '',
+    chat_data: [],
+  });
 
-	interface Chat {
-		user_id: string;
-		chat_data: Message[] | [];
-	}
+  const filteredChats = useMemo(() => {
+    return;
+  }, [searchValue, chats]);
 
-	const [searchValue, setSearchValue] = useState<string>('');
-	const [chats, setChats] = useState<Chat[]>([]);
-	const [chat, setChat] = useState<Chat>({
-		user_id: '',
-		chat_data: [],
-	});
-	const filteredChats = useMemo(() => {
-		return;
-	}, [searchValue, chats]);
+  const search = (value: string) => {
+    setSearchValue(value);
+  };
 
-	useEffect(() => {
-		if (fetchedChats.length > 0) {
-			// setChats(fetchedChats);
-			// setChat(fetchedChats[0]);
-		}
-	}, []);
+  const chatAction = (id: string) => {
+    const foundChat = chats.find((chat) => chat.user_id === id);
 
-	const search = (value: string) => {
-		setSearchValue(value);
-	};
+    if (!foundChat) return;
+    setCurrentChat(foundChat);
+  };
 
-	const chatAction = (id: string) => {
-		const foundChat = chats.find((chat) => chat.user_id === id);
+  const formatMessageTime = (isoString: string) => {
+    const date = new Date(isoString);
+    const now = new Date();
 
-		if (!foundChat) return;
-		setChat(foundChat);
-	};
+    const formatTime = (d: Date) => {
+      const hours = d.getHours().toString().padStart(2, '0');
+      const minutes = d.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    };
 
-	const formatDateTime = (isoString: string): string => {
-		const date = new Date(isoString);
-		const now = new Date();
+    const formatDate = (d: Date) => {
+      const month = (d.getMonth() + 1).toString().padStart(2, '0');
+      const day = d.getDate().toString().padStart(2, '0');
+      return `${month}/${day}`;
+    };
 
-		const formatTime = (d: Date) => {
-			const hours = d.getHours().toString().padStart(2, '0');
-			const minutes = d.getMinutes().toString().padStart(2, '0');
-			return `${hours}:${minutes}`;
-		};
+    const isToday =
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth() &&
+      date.getDate() === now.getDate();
 
-		const formatDate = (d: Date) => {
-			const month = (d.getMonth() + 1).toString().padStart(2, '0');
-			const day = d.getDate().toString().padStart(2, '0');
-			return `${month}/${day}`;
-		};
+    if (isToday) {
+      return formatTime(date);
+    }
 
-		const isToday =
-			date.getFullYear() === now.getFullYear() &&
-			date.getMonth() === now.getMonth() &&
-			date.getDate() === now.getDate();
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
 
-		if (isToday) {
-			return formatTime(date);
-		}
+    const isYesterday =
+      date.getFullYear() === yesterday.getFullYear() &&
+      date.getMonth() === yesterday.getMonth() &&
+      date.getDate() === yesterday.getDate();
 
-		const yesterday = new Date(now);
-		yesterday.setDate(now.getDate() - 1);
+    if (isYesterday) {
+      return 'Yesterday';
+    }
 
-		const isYesterday =
-			date.getFullYear() === yesterday.getFullYear() &&
-			date.getMonth() === yesterday.getMonth() &&
-			date.getDate() === yesterday.getDate();
+    return formatDate(date);
+  };
 
-		if (isYesterday) {
-			return 'Yesterday';
-		}
+  const getUser = (id: string): Contact => {
+    const user = contacts.find((contact) => contact.id === id);
 
-		return formatDate(date);
-	};
+    if (!user) {
+      return {
+        id: 'No data',
+        name: 'No data',
+        avatar: 'No data',
+        email: 'No data',
+        notifs: true,
+      };
+    } else return user;
+  };
 
-	const AddChat = () => {
-		return;
-	};
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get('http://localhost:3000/chats');
+        if (Array.isArray(data) && data.length) {
+          setChats(data);
+          setCurrentChat(data[0]);
+        }
+      } catch (err) {
+        console.error(err);
+      }
 
-	return (
-		<>
-			<main className={s.main}>
-				<section className={s.chats}>
-					<Input
-						name="search"
-						placeholder="Search chats"
-						value={searchValue}
-						onChange={(e) => search(e.target.value)}
-					/>
-					<div className={s.noChats}>
-						<p>
-							You don’t have chats yet.&nbsp;{' '}
-							<button className={s.noChats__button} onClick={AddChat}>
-								Create first contact
-							</button>
-						</p>
-					</div>
-				</section>
-				<section className={s.chat}></section>
-			</main>
-		</>
-	);
+      try {
+        const { data } = await axios.get('http://localhost:3000/contacts');
+        if (Array.isArray(data) && data.length) {
+          setContacts(data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
+  return (
+    <>
+      <main className={s.main}>
+        <section className={s.chats}>
+          <div className={s.noChats}>
+            <p>You don't have chats yet</p>
+            <Button
+              content='Send your first message'
+              onClick={() => navigate('/contacts')}
+            />
+          </div>
+          <div className={s.searchbar}>
+            <Input
+              name='search'
+              placeholder='Search chats'
+              value={searchValue}
+              onChange={(e) => search(e.target.value)}
+            />
+          </div>
+
+          {chats.map((chat) => {
+            const contact = getUser(chat.user_id);
+            const counter = chat.chat_data.filter((msg) => !msg.read).length;
+
+            return (
+              <UserInfo
+                type='message'
+                name={contact.name}
+                avatar={contact.avatar}
+                selected={chat.chat_id === currentChat.chat_id}
+                counter={counter === 0 ? null : counter}
+                onClick={() => setCurrentChat(chat)}
+                date={
+                  chat.chat_data.at(-1)
+                    ? formatMessageTime(chat.chat_data.at(-1)!.time)
+                    : 'No data'
+                }
+                content={
+                  chat.chat_data.length === 0
+                    ? 'New chat'
+                    : chat.chat_data.at(-1)?.msg
+                }
+              />
+            );
+          })}
+        </section>
+        <section className={s.chat}></section>
+      </main>
+    </>
+  );
 };
 
 export default Chats;
