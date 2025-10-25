@@ -11,6 +11,7 @@
   font-weight: 400;
 }
 .input::placeholder {
+  font-size: 1rem;
   color: var(--darkgrey);
 }
 .input:focus-visible {
