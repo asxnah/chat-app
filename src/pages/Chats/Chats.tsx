@@ -19,20 +19,20 @@ const Chats = () => {
     chat_data: [],
   });
 
-  const filteredChats = useMemo(() => {
-    return;
-  }, [searchValue, chats]);
+  // const filteredChats = useMemo(() => {
+  //   return;
+  // }, [searchValue, chats]);
 
   const search = (value: string) => {
     setSearchValue(value);
   };
 
-  const chatAction = (id: string) => {
-    const foundChat = chats.find((chat) => chat.user_id === id);
+  // const chatAction = (id: string) => {
+  //   const foundChat = chats.find((chat) => chat.user_id === id);
 
-    if (!foundChat) return;
-    setCurrentChat(foundChat);
-  };
+  //   if (!foundChat) return;
+  //   setCurrentChat(foundChat);
+  // };
 
   const formatMessageTime = (isoString: string) => {
     const date = new Date(isoString);
