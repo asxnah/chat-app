@@ -1,19 +1,19 @@
 .input {
-	padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem;
 
-	border: 0.0625rem solid var(--fill);
-	border-radius: 1rem;
-	background: var(--fill);
-	caret-color: var(--darkgrey);
+  border: 0.0625rem solid var(--fill);
+  border-radius: 1rem;
+  background: var(--fill);
+  caret-color: var(--darkgrey);
 
-	color: var(--black);
-	font-size: 1rem;
-	font-weight: 400;
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 400;
 }
 .input::placeholder {
-	color: var(--darkgrey);
+  color: var(--darkgrey);
 }
 .input:focus-visible {
-	outline: none;
-	border-color: var(--lightgrey);
+  outline: none;
+  border-color: var(--lightgrey);
 }
