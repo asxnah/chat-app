@@ -18,6 +18,8 @@ import { PaletteIcon } from '../../assets/icons/PaletteIcon';
 import { PictureIcon } from '../../assets/icons/PictureIcon';
 import { SearchIcon } from '../../assets/icons/SearchIcon';
 import { UserIcon } from '../../assets/icons/UserIcon';
+import { DotsIcon } from '../../assets/icons/DotsIcon';
+import { SendIcon } from '../../assets/icons/SendIcon';
 
 const Test = () => {
   const navigate = useNavigate();
@@ -133,6 +135,8 @@ const Test = () => {
             <PictureIcon />
             <SearchIcon />
             <UserIcon />
+            <DotsIcon />
+            <SendIcon />
           </div>
         </section>
       </main>
