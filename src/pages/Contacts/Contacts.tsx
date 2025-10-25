@@ -1,32 +1,32 @@
-import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
-import type { Contact, FormData } from "./types";
-import { UserInfo } from "../../components/UserInfo/UserInfo";
-import { Button } from "../../uikit/Button/Button";
-import { Input } from "../../uikit/Input/Input";
-import { Toggler } from "../../uikit/Toggler/Toggler";
-import { AddContactIcon } from "../../assets/icons/AddContactIcon";
-import { Popup } from "../../components/Popup/Popup";
-import { Form } from "../../components/Form/Form";
-import s from "./styles.module.css";
+import axios from 'axios';
+import { useEffect, useMemo, useState } from 'react';
+import type { Contact, FormData } from './types';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
+import { Button } from '../../uikit/Button/Button';
+import { Input } from '../../uikit/Input/Input';
+import { Toggler } from '../../uikit/Toggler/Toggler';
+import { AddContactIcon } from '../../assets/icons/AddContactIcon';
+import { Popup } from '../../components/Popup/Popup';
+import { Form } from '../../components/Form/Form';
+import s from './styles.module.css';
 
 const Contacts = () => {
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>('');
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isPopupOpened, setPopupOpened] = useState<boolean>(false);
   const [formHeading, setFormHeading] = useState<
-    "New contact" | "Edit contact"
-  >("New contact");
+    'New contact' | 'Edit contact'
+  >('New contact');
   const [user, setUser] = useState<Contact>({
-    id: "",
-    name: "",
-    avatar: "",
-    email: "",
+    id: '',
+    name: '',
+    avatar: '',
+    email: '',
     notifs: true,
   });
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
+    name: '',
+    email: '',
   });
   const filteredContacts = useMemo(() => {
     return searchValue
@@ -55,12 +55,12 @@ const Contacts = () => {
     setUser(foundContact);
   };
 
-  const openPopup = (goal: "edit" | "add") => {
-    if (goal === "add") {
-      setFormHeading("New contact");
+  const openPopup = (goal: 'edit' | 'add') => {
+    if (goal === 'add') {
+      setFormHeading('New contact');
     }
-    if (goal === "edit") {
-      setFormHeading("Edit contact");
+    if (goal === 'edit') {
+      setFormHeading('Edit contact');
       setFormData({
         name: user.name,
         email: user.email,
@@ -70,23 +70,23 @@ const Contacts = () => {
   };
 
   const submitPopup = async () => {
-    if (formHeading === "New contact") {
+    if (formHeading === 'New contact') {
       const newContact: Contact = {
         id: Date.now().toString(),
         name: formData.name,
         avatar:
-          "https://i.pinimg.com/736x/6e/49/02/6e4902bf4606759e493020262a27aa68.jpg",
+          'https://i.pinimg.com/736x/6e/49/02/6e4902bf4606759e493020262a27aa68.jpg',
         email: formData.email,
         notifs: true,
       };
 
       try {
-        await axios.post("http://localhost:3000/contacts", newContact);
+        await axios.post('http://localhost:3000/contacts', newContact);
         setContacts([...contacts, newContact]);
         setUser(newContact);
         setFormData({
-          name: "",
-          email: "",
+          name: '',
+          email: '',
         });
         setPopupOpened(false);
       } catch (err) {
@@ -94,7 +94,7 @@ const Contacts = () => {
       }
     }
 
-    if (formHeading === "Edit contact") {
+    if (formHeading === 'Edit contact') {
       try {
         await axios.patch(`http://localhost:3000/contacts/${user.id}`, {
           name: formData.name,
@@ -114,8 +114,8 @@ const Contacts = () => {
         if (updatedUser) setUser(updatedUser);
 
         setFormData({
-          name: "",
-          email: "",
+          name: '',
+          email: '',
         });
         setPopupOpened(false);
       } catch (err) {
@@ -135,10 +135,10 @@ const Contacts = () => {
         setUser(updatedContacts[0]);
       } else {
         setUser({
-          id: "",
-          name: "",
-          avatar: "",
-          email: "",
+          id: '',
+          name: '',
+          avatar: '',
+          email: '',
           notifs: true,
         });
       }
@@ -150,7 +150,7 @@ const Contacts = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/contacts");
+        const { data } = await axios.get('http://localhost:3000/contacts');
         if (Array.isArray(data) && data.length) {
           setContacts(data);
           setUser(data[0]);
@@ -167,7 +167,7 @@ const Contacts = () => {
         {isPopupOpened && (
           <Popup heading={formHeading} onClose={() => setPopupOpened(false)}>
             <Form
-              buttonText="Save"
+              buttonText='Save'
               nameValue={formData.name}
               emailValue={formData.email}
               onNameChange={(e) =>
@@ -183,12 +183,12 @@ const Contacts = () => {
         <section className={s.contactsList}>
           <div className={s.searchbar}>
             <Button
-              onClick={() => openPopup("add")}
-              content={<AddContactIcon color="#fcfcfc" />}
+              onClick={() => openPopup('add')}
+              content={<AddContactIcon color='#fcfcfc' />}
             />
             <Input
-              name="search"
-              placeholder="Search contacts"
+              name='search'
+              placeholder='Search contacts'
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
@@ -198,7 +198,7 @@ const Contacts = () => {
               return (
                 <UserInfo
                   key={contact.id}
-                  type="contact"
+                  type='contact'
                   id={contact.id}
                   name={contact.name}
                   avatar={contact.avatar}
@@ -210,10 +210,10 @@ const Contacts = () => {
           ) : (
             <div className={s.noContacts}>
               <p>
-                You don’t have contacts yet.&nbsp;{" "}
+                You don’t have contacts yet.&nbsp;{' '}
                 <button
                   className={s.noContacts__button}
-                  onClick={() => openPopup("add")}
+                  onClick={() => openPopup('add')}
                 >
                   Create first contact
                 </button>
@@ -225,7 +225,7 @@ const Contacts = () => {
               return (
                 <UserInfo
                   key={contact.id}
-                  type="contact"
+                  type='contact'
                   id={contact.id}
                   name={contact.name}
                   avatar={contact.avatar}
@@ -237,10 +237,10 @@ const Contacts = () => {
           ) : (
             <div className={s.noContacts}>
               <p>
-                You don’t have contacts yet.&nbsp;{" "}
+                You don’t have contacts yet.&nbsp;{' '}
                 <button
                   className={s.noContacts__button}
-                  onClick={() => openPopup("add")}
+                  onClick={() => openPopup('add')}
                 >
                   Create first contact
                 </button>
@@ -252,23 +252,23 @@ const Contacts = () => {
           {contacts.length > 0 ? (
             <>
               <UserInfo
-                type="profile"
+                type='profile'
                 name={user.name}
                 avatar={user.avatar}
                 content={user.email}
-                onClick={() => openPopup("edit")}
+                onClick={() => openPopup('edit')}
               />
               <ul className={s.profileTab__list}>
-                <li key="message">
+                <li key='message'>
                   <UserInfo
-                    type="link"
-                    name="Write a message"
-                    onClick={() => console.log("Write a message")}
+                    type='link'
+                    name='Write a message'
+                    onClick={() => console.log('Write a message')}
                   />
                 </li>
-                <li key="notifs">
+                <li key='notifs'>
                   <Toggler
-                    content="Notifications"
+                    content='Notifications'
                     checked={user.notifs}
                     onToggle={() => setNotifs(user.id)}
                   />
