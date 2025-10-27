@@ -7,10 +7,10 @@
 
 .noChats {
   width: fit-content;
-  margin: 12px 32px;
+  margin: 0.75rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .chats {
@@ -26,7 +26,7 @@
 }
 
 .searchbar input {
-  width: calc(100%);
+  width: 100%;
 }
 
 .chat {
@@ -41,16 +41,16 @@
 }
 
 .chat__settings {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
 
   display: grid;
   place-content: center;
 
   position: fixed;
   z-index: 1;
-  top: 16px;
-  right: 16px;
+  top: 1rem;
+  right: 1rem;
 
   border-radius: 100%;
   background: var(--white);
@@ -64,13 +64,13 @@
 }
 
 .messages {
-  padding: 32px;
+  padding: 2rem;
   flex: 1;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 0.5rem;
 }
 .chat_hasBG .messages {
   background-size: cover;
@@ -78,30 +78,30 @@
 }
 
 .message {
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   width: fit-content;
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 .message__incoming {
   align-self: flex-start;
   background-color: var(--fill);
-  border-radius: 16px 16px 16px 0;
+  border-radius: 1rem 1rem 1rem 0;
 }
 .message__outcoming {
   align-self: flex-end;
   background-color: var(--white);
-  border: 1px solid var(--lightgrey);
-  border-radius: 16px 16px 0 16px;
+  border: 0.063rem solid var(--lightgrey);
+  border-radius: 1rem 1rem 0 1rem;
 }
 .chat_hasBG .message__outcoming {
   border: none;
 }
 
 .message__time {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--darkgrey);
 }
 
@@ -112,7 +112,7 @@
   gap: 1rem;
 
   background: var(--white);
-  border-top: 1px solid var(--stroke);
+  border-top: 0.063rem solid var(--stroke);
 }
 .chat_hasBG .chat__inputCon {
   border: none;
