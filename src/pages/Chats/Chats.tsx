@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import type { Chat } from './types';
@@ -24,9 +24,28 @@ const Chats = () => {
     chat_data: [],
   });
 
-  // const filteredChats = useMemo(() => {
-  //   return;
-  // }, [searchValue, chats]);
+  const getUser = (id: string): Contact => {
+    const user = contacts.find((contact) => contact.id === id);
+
+    if (!user) {
+      return {
+        id: 'No data',
+        name: 'No data',
+        avatar: 'No data',
+        email: 'No data',
+        notifs: true,
+      };
+    } else return user;
+  };
+
+  const filteredChats = useMemo(() => {
+    return searchValue
+      ? chats.filter((chat) => {
+          const contact = getUser(chat.user_id);
+          return contact.name.toLowerCase().includes(searchValue.toLowerCase());
+        })
+      : chats;
+  }, [searchValue, chats]);
 
   const search = (value: string) => {
     setSearchValue(value);
@@ -80,20 +99,6 @@ const Chats = () => {
     return formatDate(date);
   };
 
-  const getUser = (id: string): Contact => {
-    const user = contacts.find((contact) => contact.id === id);
-
-    if (!user) {
-      return {
-        id: 'No data',
-        name: 'No data',
-        avatar: 'No data',
-        email: 'No data',
-        notifs: true,
-      };
-    } else return user;
-  };
-
   useEffect(() => {
     (async () => {
       try {
@@ -144,7 +149,7 @@ const Chats = () => {
               />
             </div>
           )}
-          {chats.map((chat) => {
+          {filteredChats.map((chat) => {
             const contact = getUser(chat.user_id);
             const counter = chat.chat_data.filter((msg) => !msg.read).length;
             return (
