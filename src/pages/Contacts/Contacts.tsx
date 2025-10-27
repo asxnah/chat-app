@@ -220,33 +220,6 @@ const Contacts = () => {
               </p>
             </div>
           )}
-          {contacts.length > 0 ? (
-            filteredContacts.map((contact) => {
-              return (
-                <UserInfo
-                  key={contact.id}
-                  type='contact'
-                  id={contact.id}
-                  name={contact.name}
-                  avatar={contact.avatar}
-                  selected={user.id === contact.id}
-                  onClick={() => selectContact(contact.id)}
-                />
-              );
-            })
-          ) : (
-            <div className={s.noContacts}>
-              <p>
-                You don’t have contacts yet.&nbsp;{' '}
-                <button
-                  className={s.noContacts__button}
-                  onClick={() => openPopup('add')}
-                >
-                  Create first contact
-                </button>
-              </p>
-            </div>
-          )}
         </section>
         <section className={s.profileTab}>
           {contacts.length > 0 ? (
