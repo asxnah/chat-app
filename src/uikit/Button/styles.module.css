@@ -1,31 +1,32 @@
 .button {
-	padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem;
 
-	border: none;
-	border-radius: 1rem;
-	background: var(--black);
+  border: none;
+  border-radius: 1rem;
+  background: var(--black);
 
-	color: var(--white, #fcfcfc);
-	font-size: 1rem;
-	font-weight: 700;
-	text-align: center;
+  color: var(--white, #fcfcfc);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  transition: background-color 0.2s;
 }
 .button:active {
-	cursor: pointer;
-	background: var(--mainColor-active);
+  cursor: pointer;
+  background-color: var(--mainColor-active);
 }
 
 .button:disabled {
-	opacity: 0.4;
+  opacity: 0.4;
 }
 .button:disabled:hover {
-	cursor: not-allowed;
-	background: var(--black);
+  cursor: not-allowed;
+  background-color: var(--black);
 }
 
 @media (hover: hover) {
-	.button:hover {
-		cursor: pointer;
-		background: var(--mainColor-hover);
-	}
+  .button:hover {
+    cursor: pointer;
+    background-color: var(--mainColor-hover);
+  }
 }

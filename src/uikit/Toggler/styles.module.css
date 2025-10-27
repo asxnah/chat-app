@@ -1,33 +1,35 @@
 .toggler {
-	padding: 0.75rem 2rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .checkbox {
-	position: relative;
+  position: relative;
 }
 
 .checkbox input {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 
-	width: 2rem;
-	height: 1rem;
+  width: 2rem;
+  height: 1rem;
 
-	opacity: 0;
+  opacity: 0;
 }
-
+.checkbox input + svg circle {
+  transition: transform 0.2s, fill 0.2s;
+}
 .checkbox input:checked + svg circle {
-	transform: translateX(1rem);
-	fill: var(--black);
+  transform: translateX(1rem);
+  fill: var(--black);
 }
 
 @media (hover: hover) {
-	.checkbox input:hover {
-		cursor: pointer;
-	}
+  .checkbox input:hover {
+    cursor: pointer;
+  }
 }
