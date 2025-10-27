@@ -15,10 +15,12 @@ const Chats = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [msg, setMsg] = useState<string>('');
+  const [hasBG, setHasBG] = useState<boolean>(false);
   const [chats, setChats] = useState<Chat[]>([]);
   const [currentChat, setCurrentChat] = useState<Chat>({
     chat_id: '',
     user_id: '',
+    backgroundImage: '',
     chat_data: [],
   });
 
@@ -37,15 +39,16 @@ const Chats = () => {
   //   setCurrentChat(foundChat);
   // };
 
+  const formatTime = (isoString: string) => {
+    const date = new Date(isoString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
   const formatMessageTime = (isoString: string) => {
     const date = new Date(isoString);
     const now = new Date();
-
-    const formatTime = (d: Date) => {
-      const hours = d.getHours().toString().padStart(2, '0');
-      const minutes = d.getMinutes().toString().padStart(2, '0');
-      return `${hours}:${minutes}`;
-    };
 
     const formatDate = (d: Date) => {
       const month = (d.getMonth() + 1).toString().padStart(2, '0');
@@ -59,7 +62,7 @@ const Chats = () => {
       date.getDate() === now.getDate();
 
     if (isToday) {
-      return formatTime(date);
+      return formatTime(isoString);
     }
 
     const yesterday = new Date(now);
@@ -114,6 +117,11 @@ const Chats = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    if (currentChat.backgroundImage === '') setHasBG(false);
+    if (currentChat.backgroundImage !== '') setHasBG(true);
+  }, [currentChat]);
+
   return (
     <>
       <main className={s.main}>
@@ -136,11 +144,9 @@ const Chats = () => {
               />
             </div>
           )}
-
           {chats.map((chat) => {
             const contact = getUser(chat.user_id);
             const counter = chat.chat_data.filter((msg) => !msg.read).length;
-
             return (
               <UserInfo
                 key={chat.chat_id}
@@ -164,11 +170,7 @@ const Chats = () => {
             );
           })}
         </section>
-        <section className={s.chat}>
-          {/* <header className={s.chatHeader}>
-            <h1 className={s.chatHeader__user}>Yuuki Asuna</h1>
-            <DotsIcon />
-          </header> */}
+        <section className={`${s.chat} ${hasBG ? s.chat_hasBG : ''}`}>
           <button
             className={s.chat__settings}
             onClick={() => alert('Open chat menu')}
@@ -176,15 +178,30 @@ const Chats = () => {
             <DotsIcon />
           </button>
           <div className={s.chatContent}>
-            <div className={s.messages}>
-              <div className={`${s.message} ${s.message__incoming}`}>
-                <p>Are you coming today?</p>
-                <span className={s.message__time}>11:30</span>
-              </div>
-              <div className={`${s.message} ${s.message__outcoming}`}>
-                <p>Yes, I'll be there</p>
-                <span className={s.message__time}>11:30</span>
-              </div>
+            <div
+              className={s.messages}
+              style={
+                hasBG
+                  ? {
+                      backgroundImage: `url(${currentChat.backgroundImage})`,
+                    }
+                  : undefined
+              }
+            >
+              {currentChat.chat_data.map((message) => (
+                <div
+                  className={`${s.message} ${
+                    message.user_id === 0
+                      ? s.message__outcoming
+                      : s.message__incoming
+                  }`}
+                >
+                  <p>{message.msg}</p>
+                  <span className={s.message__time}>
+                    {formatTime(message.time)}
+                  </span>
+                </div>
+              ))}
             </div>
             <div className={s.chat__inputCon}>
               <Input
@@ -193,7 +210,9 @@ const Chats = () => {
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
               />
-              <SendIcon />
+              <button onClick={() => alert('Send message')}>
+                <SendIcon />
+              </button>
             </div>
           </div>
         </section>

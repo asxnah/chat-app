@@ -1,5 +1,5 @@
 export interface Message {
-  user: boolean;
+  user_id: number;
   msg: string;
   time: string;
   read: boolean;
@@ -8,6 +8,7 @@ export interface Message {
 export interface Chat {
   chat_id: string;
   user_id: string;
+  backgroundImage: string;
   chat_data: Message[] | [];
 }
 

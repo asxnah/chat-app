@@ -43,7 +43,7 @@
 .chat__settings {
   width: 40px;
   height: 40px;
-  
+
   display: grid;
   place-content: center;
 
@@ -56,19 +56,6 @@
   background: var(--white);
 }
 
-/* .chatHeader {
-  padding: 12px 32px;
-
-  display: flex;
-  justify-content: space-between;
-}
-
-.chatHeader__user {
-  font-weight: 400;
-  font-size: 20px;
-  color: var(--black);
-} */
-
 .chatContent {
   height: 100%;
 
@@ -77,14 +64,15 @@
 }
 
 .messages {
-  padding: 16px;
+  padding: 32px;
   flex: 1;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-
-  background: url(https://i.pinimg.com/736x/eb/dc/e8/ebdce8c9c464076d26bae9a3133c63ed.jpg);
+  gap: 8px;
+}
+.chat_hasBG .messages {
   background-size: cover;
   background-position: center;
 }
@@ -105,7 +93,11 @@
 .message__outcoming {
   align-self: flex-end;
   background-color: var(--white);
+  border: 1px solid var(--lightgrey);
   border-radius: 16px 16px 0 16px;
+}
+.chat_hasBG .message__outcoming {
+  border: none;
 }
 
 .message__time {
@@ -120,6 +112,10 @@
   gap: 1rem;
 
   background: var(--white);
+  border-top: 1px solid var(--stroke);
+}
+.chat_hasBG .chat__inputCon {
+  border: none;
 }
 .chat__inputCon input {
   width: 100%;
