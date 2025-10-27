@@ -1,39 +1,40 @@
 .tabbar {
-	height: 100%;
+  height: 100%;
 
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-	background-color: var(--black);
+  background-color: var(--black);
 }
 
 .tabbar ul {
-	padding: 0;
+  padding: 0;
 
-	height: 100%;
+  height: 100%;
 
-	list-style-type: none;
+  list-style-type: none;
 }
 
 .tab {
-	padding: 1rem;
+  padding: 1rem;
 
-	opacity: 0.5;
+  opacity: 0.5;
+  transition: opacity 0.2s;
 }
 .tab.active {
-	opacity: 1;
+  opacity: 1;
 }
 
 .tab button {
-	width: 100%;
+  width: 100%;
 
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .tab span {
-	color: var(--white);
+  color: var(--white);
 }

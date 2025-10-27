@@ -5,41 +5,41 @@ import { SettingsIcon } from '../../assets/icons/SettingsIcon';
 import s from './styles.module.css';
 
 export const TabBar = () => {
-	const location = useLocation();
-	const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-	if (location.pathname === '/auth') return null;
+  if (location.pathname === '/auth') return null;
 
-	return (
-		<aside className={s.tabbar}>
-			<ul>
-				<li
-					className={`${s.tab} ${location.pathname === '/chats' && s.active}`}
-				>
-					<button onClick={() => navigate('/chats')}>
-						<ChatsIcon />
-						<span>Chats</span>
-					</button>
-				</li>
-				<li
-					className={`${s.tab} ${
-						location.pathname === '/contacts' && s.active
-					}`}
-				>
-					<button onClick={() => navigate('/contacts')}>
-						<ContactsIcon />
-						<span>Contacts</span>
-					</button>
-				</li>
-			</ul>
-			<div
-				className={`${s.tab} ${location.pathname === '/settings' && s.active}`}
-			>
-				<button onClick={() => navigate('/settings')}>
-					<SettingsIcon />
-					<span>Settings</span>
-				</button>
-			</div>
-		</aside>
-	);
+  return (
+    <aside className={s.tabbar}>
+      <ul>
+        <li
+          className={`${s.tab} ${location.pathname === '/chats' && s.active}`}
+        >
+          <button onClick={() => navigate('/chats')}>
+            <ChatsIcon />
+            <span>Chats</span>
+          </button>
+        </li>
+        <li
+          className={`${s.tab} ${
+            location.pathname === '/contacts' && s.active
+          }`}
+        >
+          <button onClick={() => navigate('/contacts')}>
+            <ContactsIcon />
+            <span>Contacts</span>
+          </button>
+        </li>
+      </ul>
+      <div
+        className={`${s.tab} ${location.pathname === '/settings' && s.active}`}
+      >
+        <button onClick={() => navigate('/settings')}>
+          <SettingsIcon />
+          <span>Settings</span>
+        </button>
+      </div>
+    </aside>
+  );
 };
