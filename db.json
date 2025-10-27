@@ -3,6 +3,7 @@
     {
       "chat_id": "1",
       "user_id": "1",
+      "backgroundImage": "",
       "chat_data": [
         {
           "user_id": 1,
@@ -45,6 +46,7 @@
     {
       "chat_id": "2",
       "user_id": "2",
+      "backgroundImage": "https://i.pinimg.com/736x/20/3a/80/203a80fdf2af69d79b40b324740aa4cd.jpg",
       "chat_data": [
         {
           "user_id": 2,
@@ -67,7 +69,7 @@
         {
           "user_id": 2,
           "msg": "Need coffee ☕️",
-          "time": "2025-08-28T08:08:00+05:00",
+          "time": "2025-10-27T16:07:00+05:00",
           "read": false
         }
       ]
@@ -75,6 +77,7 @@
     {
       "chat_id": "3",
       "user_id": "3",
+      "backgroundImage": "",
       "chat_data": [
         {
           "user_id": 3,
@@ -97,7 +100,7 @@
         {
           "user_id": 0,
           "msg": "Perfect, I’ll bring snacks 🍿",
-          "time": "2025-08-29T20:18:00+05:00",
+          "time": "2025-10-26T13:00:00+05:00",
           "read": true
         }
       ]
@@ -105,6 +108,7 @@
     {
       "chat_id": "4",
       "user_id": "4",
+      "backgroundImage": "https://i.pinimg.com/736x/63/94/54/639454fd5b2aef1588ffbeab820f2284.jpg",
       "chat_data": [
         {
           "user_id": 4,
@@ -129,6 +133,7 @@
     {
       "chat_id": "5",
       "user_id": "5",
+      "backgroundImage": "",
       "chat_data": [
         {
           "user_id": 5,
@@ -159,6 +164,7 @@
     {
       "chat_id": "6",
       "user_id": "6",
+      "backgroundImage": "https://i.pinimg.com/736x/4c/e5/02/4ce50245c321b95b8cd26a8f82ee24a5.jpg",
       "chat_data": [
         {
           "user_id": 6,
