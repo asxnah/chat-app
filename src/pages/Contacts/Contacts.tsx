@@ -82,7 +82,11 @@ const Contacts = () => {
 
       try {
         await axios.post('http://localhost:3000/contacts', newContact);
-        setContacts([...contacts, newContact]);
+        const updatedContacts = [...contacts, newContact];
+        const sortedContacts = updatedContacts.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setContacts(sortedContacts);
         setUser(newContact);
         setFormData({
           name: '',
@@ -106,9 +110,12 @@ const Contacts = () => {
             ? { ...contact, name: formData.name, email: formData.email }
             : contact
         );
-        setContacts(updatedContacts);
+        const sortedContacts = updatedContacts.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setContacts(sortedContacts);
 
-        const updatedUser = updatedContacts.find(
+        const updatedUser = sortedContacts.find(
           (contact) => contact.id === user.id
         );
         if (updatedUser) setUser(updatedUser);
@@ -129,10 +136,13 @@ const Contacts = () => {
       await axios.delete(`http://localhost:3000/contacts/${id}`);
 
       const updatedContacts = contacts.filter((contact) => contact.id !== id);
-      setContacts(updatedContacts);
+      const sortedContacts = updatedContacts.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setContacts(sortedContacts);
 
-      if (updatedContacts.length > 0) {
-        setUser(updatedContacts[0]);
+      if (sortedContacts.length > 0) {
+        setUser(sortedContacts[0]);
       } else {
         setUser({
           id: '',
@@ -152,8 +162,11 @@ const Contacts = () => {
       try {
         const { data } = await axios.get('http://localhost:3000/contacts');
         if (Array.isArray(data) && data.length) {
-          setContacts(data);
-          setUser(data[0]);
+          const sortedContacts = data.sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
+          setContacts(sortedContacts);
+          setUser(sortedContacts[0]);
         }
       } catch (err) {
         console.error(err);
