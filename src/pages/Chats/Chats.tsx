@@ -1,14 +1,20 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
+
+import { user_session_id } from '../../../config.ts';
+
 import type { Chat } from './types';
 import type { Contact } from './types';
+
 import { DotsIcon } from '../../assets/icons/DotsIcon';
 import { Input } from '../../uikit/Input/Input';
 import { Button } from '../../uikit/Button/Button';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
-import s from './styles.module.css';
 import { SendIcon } from '../../assets/icons/SendIcon';
+
+import s from './styles.module.css';
 
 const Chats = () => {
   const navigate = useNavigate();
@@ -51,12 +57,23 @@ const Chats = () => {
     setSearchValue(value);
   };
 
-  // const chatAction = (id: string) => {
-  //   const foundChat = chats.find((chat) => chat.user_id === id);
+  const sendMsg = async (chat: Chat) => {
+    const updatedChat = {
+      ...chat,
+      chat_data: [
+        ...chat.chat_data,
+        {
+          user_id: user_session_id,
+          msg: msg,
+          time: new Date().toISOString(),
+          read: false,
+        },
+      ],
+    };
 
-  //   if (!foundChat) return;
-  //   setCurrentChat(foundChat);
-  // };
+    await axios.put(`http://localhost:3000/chats/${chat.chat_id}`, updatedChat);
+    setCurrentChat(updatedChat);
+  };
 
   const formatTime = (isoString: string) => {
     const date = new Date(isoString);
@@ -196,7 +213,7 @@ const Chats = () => {
               {currentChat.chat_data.map((message) => (
                 <div
                   className={`${s.message} ${
-                    message.user_id === 0
+                    message.user_id === user_session_id
                       ? s.message__outcoming
                       : s.message__incoming
                   }`}
@@ -215,7 +232,7 @@ const Chats = () => {
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
               />
-              <button onClick={() => alert('Send message')}>
+              <button onClick={() => sendMsg(currentChat)}>
                 <SendIcon />
               </button>
             </div>
