@@ -9,7 +9,7 @@ type UserInfoProps = {
   avatar?: string;
   content?: 'Typing...' | 'New chat' | string;
   date?: string;
-  counter?: number | null;
+  counter?: number | 0;
   selected?: boolean;
   onClick?: (e: MouseEvent) => void;
 };
@@ -21,7 +21,7 @@ export const UserInfo = ({
   avatar,
   content,
   date,
-  counter = null,
+  counter = 0,
   selected,
   onClick,
 }: UserInfoProps) => {
@@ -49,7 +49,7 @@ export const UserInfo = ({
                 {content}
               </p>
             )}
-            {counter !== null && (
+            {counter !== 0 && (
               <div className={s.counter}>
                 <span>{counter}</span>
               </div>

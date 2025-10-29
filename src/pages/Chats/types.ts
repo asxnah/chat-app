@@ -1,21 +1,22 @@
 export interface Message {
-  user_id: number;
+  id: string;
+  user_id: string;
   msg: string;
   time: string;
   read: boolean;
 }
 
 export interface Chat {
-  chat_id: string;
+  id: string;
   user_id: string;
   backgroundImage: string;
   chat_data: Message[] | [];
 }
 
-export interface Contact {
+export interface User {
   id: string;
   name: string;
   avatar: string;
   email: string;
-  notifs: boolean;
+  chats: string[];
 }

@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
+import { generateID } from '../../utils/generateID.ts';
+
 import { user_session_id } from '../../../config.ts';
 
 import type { Chat } from './types';
-import type { Contact } from './types';
+import type { User } from './types';
 
 import { DotsIcon } from '../../assets/icons/DotsIcon';
 import { Input } from '../../uikit/Input/Input';
@@ -18,20 +20,20 @@ import s from './styles.module.css';
 
 const Chats = () => {
   const navigate = useNavigate();
-  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [msg, setMsg] = useState<string>('');
   const [hasBG, setHasBG] = useState<boolean>(false);
   const [chats, setChats] = useState<Chat[]>([]);
   const [currentChat, setCurrentChat] = useState<Chat>({
-    chat_id: '',
+    id: '',
     user_id: '',
     backgroundImage: '',
     chat_data: [],
   });
 
-  const getUser = (id: string): Contact => {
-    const user = contacts.find((contact) => contact.id === id);
+  const getUser = (id: string): User => {
+    const user = users.find((user) => user.id === id);
 
     if (!user) {
       return {
@@ -39,18 +41,25 @@ const Chats = () => {
         name: 'No data',
         avatar: 'No data',
         email: 'No data',
-        notifs: true,
+        chats: [],
       };
     } else return user;
   };
 
   const filteredChats = useMemo(() => {
-    return searchValue
-      ? chats.filter((chat) => {
-          const contact = getUser(chat.user_id);
-          return contact.name.toLowerCase().includes(searchValue.toLowerCase());
-        })
-      : chats;
+    if (!searchValue) return chats;
+
+    return chats.filter((chat) => {
+      const contactId = chat.chat_data.find(
+        (msg) => msg.user_id !== user_session_id
+      )?.id;
+
+      const contact = contactId ? getUser(contactId) : null;
+
+      return (
+        contact?.name.toLowerCase().includes(searchValue.toLowerCase()) ?? false
+      );
+    });
   }, [searchValue, chats]);
 
   const search = (value: string) => {
@@ -58,21 +67,31 @@ const Chats = () => {
   };
 
   const sendMsg = async (chat: Chat) => {
-    const updatedChat = {
-      ...chat,
-      chat_data: [
-        ...chat.chat_data,
-        {
-          user_id: user_session_id,
-          msg: msg,
-          time: new Date().toISOString(),
-          read: false,
-        },
-      ],
+    const newMsg = {
+      id: `msg-${generateID()}`,
+      user_id: user_session_id,
+      msg: msg,
+      time: new Date().toISOString(),
+      read: false,
     };
 
-    await axios.put(`http://localhost:3000/chats/${chat.chat_id}`, updatedChat);
-    setCurrentChat(updatedChat);
+    await axios.patch(`http://localhost:3000/chats/${chat.id}`, {
+      chat_data: [...chat.chat_data, newMsg],
+    });
+    setCurrentChat((chat) => ({
+      ...chat,
+      chat_data: [...chat.chat_data, newMsg],
+    }));
+
+    try {
+      const { data } = await axios.get('http://localhost:3000/chats');
+      if (Array.isArray(data) && data.length) {
+        setChats(data);
+        setCurrentChat(data[0]);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const formatTime = (isoString: string) => {
@@ -129,9 +148,9 @@ const Chats = () => {
       }
 
       try {
-        const { data } = await axios.get('http://localhost:3000/contacts');
+        const { data } = await axios.get('http://localhost:3000/users');
         if (Array.isArray(data) && data.length) {
-          setContacts(data);
+          setUsers(data);
         }
       } catch (err) {
         console.error(err);
@@ -167,16 +186,18 @@ const Chats = () => {
             </div>
           )}
           {filteredChats.map((chat) => {
-            const contact = getUser(chat.user_id);
-            const counter = chat.chat_data.filter((msg) => !msg.read).length;
+            const id = chat.chat_data.find(
+              (msg) => msg.user_id !== user_session_id
+            )!.user_id;
+            const contact = getUser(id);
             return (
               <UserInfo
-                key={chat.chat_id}
+                key={chat.id}
                 type='message'
                 name={contact.name}
                 avatar={contact.avatar}
-                selected={chat.chat_id === currentChat.chat_id}
-                counter={counter === 0 ? null : counter}
+                selected={chat.id === currentChat.id}
+                counter={0}
                 onClick={() => setCurrentChat(chat)}
                 date={
                   chat.chat_data.at(-1)
@@ -210,32 +231,38 @@ const Chats = () => {
                   : undefined
               }
             >
-              {currentChat.chat_data.map((message) => (
-                <div
-                  className={`${s.message} ${
-                    message.user_id === user_session_id
-                      ? s.message__outcoming
-                      : s.message__incoming
-                  }`}
-                >
-                  <p>{message.msg}</p>
-                  <span className={s.message__time}>
-                    {formatTime(message.time)}
-                  </span>
-                </div>
-              ))}
+              {currentChat.chat_data.map((message) => {
+                return (
+                  <div
+                    key={message.id}
+                    className={`${s.message} ${
+                      message.user_id === user_session_id
+                        ? s.message__outcoming
+                        : s.message__incoming
+                    }`}
+                  >
+                    <p>{message.msg}</p>
+                    <span className={s.message__time}>
+                      {formatTime(message.time)}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-            <div className={s.chat__inputCon}>
+            <form
+              className={s.chat__inputCon}
+              onSubmit={() => sendMsg(currentChat)}
+            >
               <Input
                 name='msg'
                 placeholder='Message'
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
               />
-              <button onClick={() => sendMsg(currentChat)}>
+              <button type='submit'>
                 <SendIcon />
               </button>
-            </div>
+            </form>
           </div>
         </section>
       </main>
