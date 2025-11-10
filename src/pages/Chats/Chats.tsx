@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -66,7 +66,9 @@ const Chats = () => {
     setSearchValue(value);
   };
 
-  const sendMsg = async (chat: Chat) => {
+  const sendMsg = async (e: FormEvent<HTMLFormElement>, chat: Chat) => {
+    e.preventDefault();
+
     const newMsg = {
       id: `msg-${generateID()}`,
       user_id: user_session_id,
@@ -251,7 +253,7 @@ const Chats = () => {
             </div>
             <form
               className={s.chat__inputCon}
-              onSubmit={() => sendMsg(currentChat)}
+              onSubmit={(e) => sendMsg(e, currentChat)}
             >
               <Input
                 name='msg'
