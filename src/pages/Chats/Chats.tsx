@@ -89,11 +89,12 @@ const Chats = () => {
       const { data } = await axios.get('http://localhost:3000/chats');
       if (Array.isArray(data) && data.length) {
         setChats(data);
-        setCurrentChat(data[0]);
       }
     } catch (err) {
       console.error(err);
     }
+
+    setMsg('');
   };
 
   const formatTime = (isoString: string) => {
